@@ -30,7 +30,11 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\ХНУРЕ\\3 Курс\\2 Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.BLL\\SmartGarden.BLL.csproj": {
+                "projectPath": "D:\\ХНУРЕ\\3 Курс\\2 Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.BLL\\SmartGarden.BLL.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -41,6 +45,16 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.Certificate": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -55,6 +69,138 @@
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.407\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\ХНУРЕ\\3 Курс\\2 Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.BLL\\SmartGarden.BLL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\ХНУРЕ\\3 Курс\\2 Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.BLL\\SmartGarden.BLL.csproj",
+        "projectName": "SmartGarden.BLL",
+        "projectPath": "D:\\ХНУРЕ\\3 Курс\\2 Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.BLL\\SmartGarden.BLL.csproj",
+        "packagesPath": "C:\\Users\\diffd\\.nuget\\packages\\",
+        "outputPath": "D:\\ХНУРЕ\\3 Курс\\2 Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.BLL\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\diffd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "D:\\ХНУРЕ\\3 Курс\\2 Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj": {
+                "projectPath": "D:\\ХНУРЕ\\3 Курс\\2 Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.407\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\ХНУРЕ\\3 Курс\\2 Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\ХНУРЕ\\3 Курс\\2 Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj",
+        "projectName": "SmartGarden.DAL",
+        "projectPath": "D:\\ХНУРЕ\\3 Курс\\2 Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj",
+        "packagesPath": "C:\\Users\\diffd\\.nuget\\packages\\",
+        "outputPath": "D:\\ХНУРЕ\\3 Курс\\2 Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\diffd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

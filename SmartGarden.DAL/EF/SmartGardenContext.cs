@@ -21,6 +21,7 @@ namespace SmartGarden.DAL.EF
 		{
 			var admin = new User
 			{
+				Id = 1,
 				Name = "admin",
 				Email = "admin@gmail.com",
 				Password = "admin",
@@ -31,6 +32,7 @@ namespace SmartGarden.DAL.EF
 
 			var user = new User
 			{
+				Id = 2,
 				Name = "user",
 				Email = "user@gmail.com",
 				Password = "user",
@@ -38,6 +40,16 @@ namespace SmartGarden.DAL.EF
 			};
 
 			modelBuilder.Entity<User>().HasData(user);
+
+			var garden = new Garden
+			{
+				Id = 1,
+				Name = "my garden",
+				Description = "desc my garden",
+				UserId = 2
+			};
+
+			modelBuilder.Entity<Garden>().HasData(garden);
 
 			base.OnModelCreating(modelBuilder);
 		}

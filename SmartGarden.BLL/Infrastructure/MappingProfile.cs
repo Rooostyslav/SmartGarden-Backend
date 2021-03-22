@@ -14,12 +14,15 @@ namespace SmartGarden.BLL.Infrastructure
 		{
 			CreateMap<User, UserDTO>().ReverseMap();
 			CreateMap<User, CreateUserDTO>();
+			CreateMap<User, ViewUserDTO>();
 
 			CreateMap<Garden, GardenDTO>().ReverseMap();
 			CreateMap<Garden, CreateGardenDTO>();
+			CreateMap<Garden, ViewGardenDTO>();
 
 			CreateMap<Plant, PlantDTO>().ReverseMap();
 			CreateMap<Plant, CreatePlantDTO>();
+			CreateMap<Plant, ViewPlantDTO>();
 
 			CreateMap<Action, ActionDTO>().ReverseMap();
 			CreateMap<Action, CreateActionDTO>();

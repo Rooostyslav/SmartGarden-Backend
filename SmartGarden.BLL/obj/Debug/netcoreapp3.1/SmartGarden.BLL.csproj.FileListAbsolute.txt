@@ -1,12 +1,12 @@
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.BLL\bin\Debug\netcoreapp3.1\SmartGarden.BLL.deps.json
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.BLL\bin\Debug\netcoreapp3.1\SmartGarden.BLL.dll
+D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.BLL\bin\Debug\netcoreapp3.1\SmartGarden.BLL.pdb
+D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.BLL\bin\Debug\netcoreapp3.1\SmartGarden.DAL.dll
+D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.BLL\bin\Debug\netcoreapp3.1\SmartGarden.DAL.pdb
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.BLL\obj\Debug\netcoreapp3.1\SmartGarden.BLL.csprojAssemblyReference.cache
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.BLL\obj\Debug\netcoreapp3.1\SmartGarden.BLL.AssemblyInfoInputs.cache
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.BLL\obj\Debug\netcoreapp3.1\SmartGarden.BLL.AssemblyInfo.cs
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.BLL\obj\Debug\netcoreapp3.1\SmartGarden.BLL.csproj.CoreCompileInputs.cache
-D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.BLL\bin\Debug\netcoreapp3.1\SmartGarden.BLL.pdb
-D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.BLL\bin\Debug\netcoreapp3.1\SmartGarden.DAL.dll
-D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.BLL\bin\Debug\netcoreapp3.1\SmartGarden.DAL.pdb
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.BLL\obj\Debug\netcoreapp3.1\SmartGarden.BLL.csproj.CopyComplete
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.BLL\obj\Debug\netcoreapp3.1\SmartGarden.BLL.dll
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.BLL\obj\Debug\netcoreapp3.1\SmartGarden.BLL.pdb

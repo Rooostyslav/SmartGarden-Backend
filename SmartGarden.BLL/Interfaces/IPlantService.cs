@@ -6,9 +6,9 @@ namespace SmartGarden.BLL.Interfaces
 {
 	public interface IPlantService
 	{
-		Task<IEnumerable<PlantDTO>> FindPlantsByGardenAsync(int gardenId);
+		Task<IEnumerable<ViewPlantDTO>> FindPlantsByGardenAsync(int gardenId);
 
-		Task<PlantDTO> FindPlantByIdAsync(int id);
+		Task<ViewPlantDTO> FindPlantByIdAsync(int id);
 
 		Task CreateAsync(CreatePlantDTO plantToCreate);
 

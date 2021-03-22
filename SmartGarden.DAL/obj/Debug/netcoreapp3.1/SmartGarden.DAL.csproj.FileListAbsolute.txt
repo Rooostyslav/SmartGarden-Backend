@@ -1,9 +1,9 @@
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.DAL\bin\Debug\netcoreapp3.1\SmartGarden.DAL.deps.json
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.DAL\bin\Debug\netcoreapp3.1\SmartGarden.DAL.dll
+D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.DAL\bin\Debug\netcoreapp3.1\SmartGarden.DAL.pdb
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.DAL\obj\Debug\netcoreapp3.1\SmartGarden.DAL.csprojAssemblyReference.cache
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.DAL\obj\Debug\netcoreapp3.1\SmartGarden.DAL.AssemblyInfoInputs.cache
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.DAL\obj\Debug\netcoreapp3.1\SmartGarden.DAL.AssemblyInfo.cs
-D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.DAL\bin\Debug\netcoreapp3.1\SmartGarden.DAL.pdb
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.DAL\obj\Debug\netcoreapp3.1\SmartGarden.DAL.csproj.CoreCompileInputs.cache
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.DAL\obj\Debug\netcoreapp3.1\SmartGarden.DAL.dll
 D:\ХНУРЕ\3 Курс\2 Семестр\АПЗ\Проект\SmartGarden\SmartGarden.DAL\obj\Debug\netcoreapp3.1\SmartGarden.DAL.pdb

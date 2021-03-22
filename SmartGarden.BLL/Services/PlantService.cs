@@ -35,23 +35,17 @@ namespace SmartGarden.BLL.Services
 			await unitOfWork.SaveAsync();
 		}
 
-		public async Task DeletePlantAsync(int id)
-		{
-			await plantRepository.DeleteAsync(id);
-			await unitOfWork.SaveAsync();
-		}
-
-		public async Task<PlantDTO> FindPlantByIdAsync(int id)
+		public async Task<ViewPlantDTO> FindPlantByIdAsync(int id)
 		{
 			var plants = await plantRepository.FindWithIncludesAsync(p => p.Id == id);
 			var plant = plants.FirstOrDefault();
-			return mapper.Map<PlantDTO>(plant);
+			return mapper.Map<ViewPlantDTO>(plant);
 		}
 
-		public async Task<IEnumerable<PlantDTO>> FindPlantsByGardenAsync(int gardenId)
+		public async Task<IEnumerable<ViewPlantDTO>> FindPlantsByGardenAsync(int gardenId)
 		{
 			var plants = await plantRepository.FindWithIncludesAsync(p => p.GardenId == gardenId);
-			return mapper.Map<IEnumerable<PlantDTO>>(plants);
+			return mapper.Map<IEnumerable<ViewPlantDTO>>(plants);
 		}
 	}
 }

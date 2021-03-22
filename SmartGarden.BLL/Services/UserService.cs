@@ -4,6 +4,7 @@ using SmartGarden.BLL.DTO.Users;
 using SmartGarden.BLL.Interfaces;
 using SmartGarden.DAL.Entity;
 using SmartGarden.DAL.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,6 +38,12 @@ namespace SmartGarden.BLL.Services
 
 			var user = users.FirstOrDefault();
 			return mapper.Map<UserDTO>(user);
+		}
+
+		public async Task<IEnumerable<ViewUserDTO>> FindAllUsersAsync()
+		{
+			var users = await userRepository.FindWithIncludesAsync(null);
+			return mapper.Map<IEnumerable<ViewUserDTO>>(users);
 		}
 	}
 }

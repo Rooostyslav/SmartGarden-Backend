@@ -35,12 +35,13 @@ namespace SmartGarden.API
 				.AddCertificate();
 
 			services.AddCors(options =>
-				options.AddPolicy("CorsPolicy",
-					builder => builder.AllowAnyOrigin()
-					.AllowAnyMethod()
-					.AllowAnyHeader()));
-
-			services.AddCors();
+			{
+				options.AddDefaultPolicy(
+					builder =>
+					{
+						builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+					});
+			});
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,13 +51,14 @@ namespace SmartGarden.API
 				app.UseDeveloperExceptionPage();
 			}
 
-			app.UseHttpsRedirection();
 			app.UseRouting();
 
 			app.UseAuthorization();
 			app.UseAuthentication();
 
-			app.UseCors("CorsPolicy");
+			app.UseCors();
+
+			app.UseHttpsRedirection();
 
 			app.UseEndpoints(endpoints =>
 			{

@@ -28,10 +28,10 @@ namespace SmartGarden.BLL.Services
 			await unitOfWork.SaveAsync();
 		}
 
-		public async Task<IEnumerable<GardenDTO>> FindGardenByUserAsync(int userId)
+		public async Task<IEnumerable<ViewGardenDTO>> FindGardenByUserAsync(int userId)
 		{
 			var gardens = await gardenRepository.FindWithIncludesAsync(g => g.UserId == userId);
-			return mapper.Map<IEnumerable<GardenDTO>>(gardens);
+			return mapper.Map<IEnumerable<ViewGardenDTO>>(gardens);
 		}
 	}
 }

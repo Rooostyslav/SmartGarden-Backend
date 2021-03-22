@@ -6,7 +6,7 @@ namespace SmartGarden.BLL.Interfaces
 {
 	public interface IGardenService
 	{
-		Task<IEnumerable<GardenDTO>> FindGardenByUserAsync(int userId);
+		Task<IEnumerable<ViewGardenDTO>> FindGardenByUserAsync(int userId);
 
 		Task CreateAsync(CreateGardenDTO gardenToCreate);
 	}

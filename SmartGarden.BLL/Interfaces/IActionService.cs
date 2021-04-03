@@ -6,7 +6,7 @@ namespace SmartGarden.BLL.Interfaces
 {
 	public interface IActionService
 	{
-		Task<IEnumerable<ActionDTO>> FindActionsByPlantAsync(int plantId);
+		Task<IEnumerable<ViewActionDTO>> FindActionsByPlantAsync(int plantId);
 
 		Task<ActionDTO> FindActionByIdAsync(int id);
 

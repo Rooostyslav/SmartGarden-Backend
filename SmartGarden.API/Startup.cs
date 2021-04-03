@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Authentication.Certificate;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using SmartGarden.Auth.Common;
 using SmartGarden.BLL.Infrastructure;
 
 namespace SmartGarden.API
@@ -19,6 +22,29 @@ namespace SmartGarden.API
 
 		public void ConfigureServices(IServiceCollection services)
 		{
+
+
+			var authOptions = Configuration.GetSection("Auth").Get<AuthOptions>();
+			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddJwtBearer(options =>
+				{
+					options.RequireHttpsMetadata = true;
+					options.TokenValidationParameters = new TokenValidationParameters
+					{
+						ValidateIssuer = true,
+						ValidIssuer = authOptions.Issuer,
+
+						ValidateAudience = true,
+						ValidAudience = authOptions.Audience,
+
+						ValidateLifetime = true,
+
+						IssuerSigningKey = authOptions.GetSymmetricSecurityKey(),
+						ValidateIssuerSigningKey = true
+					};
+				});
+
+
 			string connectionString = Configuration.GetConnectionString("DefaultConnection");
 			services.AddContextService(connectionString);
 

@@ -32,6 +32,14 @@ namespace SmartGarden.API.Controllers
 			return NotFound();
 		}
 
+		[HttpGet("{plantId}/condition")]
+		public async Task<IActionResult> GetConditionPlant(int plantId)
+		{
+			double plantCondition = await plantService.PlantCondition(plantId);
+
+			return Ok(plantCondition);
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> CreatePlant([FromBody] CreatePlantDTO plant)
 		{

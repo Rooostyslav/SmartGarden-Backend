@@ -16,7 +16,7 @@ namespace SmartGarden.DAL.Interfaces
 
 		Task AddAsync(Resource resource);
 
-		void Update(Resource resourceToUpddate);
+		void Update(int id, Resource resourceToUpddate);
 
 		Task DeleteAsync(object id);
 	}

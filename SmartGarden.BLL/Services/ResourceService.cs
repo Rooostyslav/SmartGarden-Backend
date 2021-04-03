@@ -18,10 +18,10 @@ namespace SmartGarden.BLL.Services
 			this.mapper = mapper;
 		}
 
-		public async Task<IEnumerable<ResourceDTO>> FindResourcesByGardenAsync(int gardenId)
+		public async Task<IEnumerable<ViewResourceDTO>> FindResourcesByGardenAsync(int gardenId)
 		{
 			var resources = await resourсeRepository.FindWithIncludesAsync(r => r.GardenId == gardenId);
-			return mapper.Map<IEnumerable<ResourceDTO>>(resources);
+			return mapper.Map<IEnumerable<ViewResourceDTO>>(resources);
 		}
 	}
 }

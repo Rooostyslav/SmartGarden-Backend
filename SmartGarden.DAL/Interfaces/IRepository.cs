@@ -13,7 +13,7 @@ namespace SmartGarden.DAL.Interfaces
 
 		Task AddAsync(TEntity entity);
 
-		void Update(TEntity entityToUpdate);
+		void Update(int id, TEntity entityToUpdate);
 
 		Task DeleteAsync(object id);
 

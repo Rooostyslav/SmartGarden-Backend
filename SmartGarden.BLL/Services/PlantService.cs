@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SmartGarden.BLL.DTO.Plants;
+using SmartGarden.BLL.Infrastructure;
 using SmartGarden.BLL.Interfaces;
 using SmartGarden.DAL.Entity;
 using SmartGarden.DAL.Interfaces;
@@ -46,6 +47,12 @@ namespace SmartGarden.BLL.Services
 		{
 			var plants = await plantRepository.FindWithIncludesAsync(p => p.GardenId == gardenId);
 			return mapper.Map<IEnumerable<ViewPlantDTO>>(plants);
+		}
+
+		public async Task<double> PlantCondition(int plantId)
+		{
+			PlantCondition plantCondition = new PlantCondition(unitOfWork);
+			return await plantCondition.GetCondition(plantId);
 		}
 	}
 }

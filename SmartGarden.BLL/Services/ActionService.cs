@@ -42,16 +42,16 @@ namespace SmartGarden.BLL.Services
 			return mapper.Map<ActionDTO>(action);
 		}
 
-		public async Task<IEnumerable<ActionDTO>> FindActionsByPlantAsync(int plantId)
+		public async Task<IEnumerable<ViewActionDTO>> FindActionsByPlantAsync(int plantId)
 		{
 			var actions = await actionRepository.FindWithIncludesAsync(a => a.PlantId == plantId);
-			return mapper.Map<IEnumerable<ActionDTO>>(actions);
+			return mapper.Map<IEnumerable<ViewActionDTO>>(actions);
 		}
 
 		public async Task UpdateAsync(UpdateActionDTO actionToUpdate)
 		{
 			var action = mapper.Map<Action>(actionToUpdate);
-			actionRepository.Update(action);
+			actionRepository.Update(action.Id, action);
 			await unitOfWork.SaveAsync();
 		}
 	}

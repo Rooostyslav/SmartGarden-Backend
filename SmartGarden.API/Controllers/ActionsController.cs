@@ -43,8 +43,10 @@ namespace SmartGarden.API.Controllers
 		}
 
 		[HttpPut("{actionId}")]
-		public async Task<IActionResult> UpdateAction([FromBody] UpdateActionDTO action)
+		public async Task<IActionResult> UpdateAction(int actionId, [FromBody] UpdateActionDTO action)
 		{
+			action.Id = actionId;
+
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);

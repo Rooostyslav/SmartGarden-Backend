@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SmartGarden.BLL.DTO.Users;
 using SmartGarden.BLL.Interfaces;
 
 namespace SmartGarden.API.Controllers
@@ -42,6 +44,18 @@ namespace SmartGarden.API.Controllers
 			}
 
 			return NoContent();
+		}
+
+		public async Task<IActionResult> CreateUser([FromBody] CreateUserDTO user)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			await userService.CreateAsync(user);
+
+			return Ok();
 		}
 	}
 }

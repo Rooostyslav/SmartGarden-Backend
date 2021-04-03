@@ -40,9 +40,12 @@ namespace SmartGarden.DAL.Repositories
 			await smartGardenContext.AddAsync(entity);
 		}
 
-		public void Update(TEntity entityToUpdate)
+		public void Update(int id, TEntity entityToUpdate)
 		{
 			smartGardenContext.Update(entityToUpdate);
+
+			//var entiny = FindByIdAsync(id).Result;
+			//smartGardenContext.Entry(entityToUpdate).State = EntityState.Modified;
 		}
 
 		public async Task DeleteAsync(object id)

@@ -13,5 +13,7 @@ namespace SmartGarden.BLL.Interfaces
 		Task CreateAsync(CreatePlantDTO plantToCreate);
 
 		Task DeleteAsync(int id);
+
+		Task<double> PlantCondition(int plantId);
 	}
 }

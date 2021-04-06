@@ -37,7 +37,10 @@ namespace SmartGarden.API.Controllers
 		{
 			double plantCondition = await plantService.PlantCondition(plantId);
 
-			return Ok(plantCondition);
+			return Ok(new 
+			{
+				condition = plantCondition
+			});
 		}
 
 		[HttpPost]

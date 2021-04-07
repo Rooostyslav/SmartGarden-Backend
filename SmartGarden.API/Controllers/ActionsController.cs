@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartGarden.BLL.DTO.Actions;
 using SmartGarden.BLL.Interfaces;
 using System.Threading.Tasks;
 
 namespace SmartGarden.API.Controllers
 {
+	[Authorize(Roles = "admin, user")]
 	[Route("api/actions")]
 	[ApiController]
 	public class ActionsController : ControllerBase

@@ -8,6 +8,8 @@ namespace SmartGarden.BLL.Interfaces
 	{
 		Task<IEnumerable<ViewGardenDTO>> FindGardenByUserAsync(int userId);
 
+		Task<ViewGardenDTO> FindGardenByIdAsync(int id);
+
 		Task CreateAsync(CreateGardenDTO gardenToCreate);
 	}
 }

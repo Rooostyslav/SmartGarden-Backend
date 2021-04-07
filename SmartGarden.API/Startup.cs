@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -48,24 +47,28 @@ namespace SmartGarden.API
 			string connectionString = Configuration.GetConnectionString("DefaultConnection");
 			services.AddContextService(connectionString);
 
-			services.AddAutoMapper();
 			services.AddServices();
-
-			services.AddControllersWithViews()
-				.AddNewtonsoftJson(options =>
-					options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
+			services.AddAutoMapper();
+			services.AddControllers();
 			services.AddAuthorization();
-			services.AddAuthentication(
-				CertificateAuthenticationDefaults.AuthenticationScheme)
-				.AddCertificate();
+
+			//services.AddControllersWithViews()
+			//	.AddNewtonsoftJson(options =>
+			//		options.SerializerSettings.ReferenceLoopHandling =
+			//		Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+			//services.AddAuthentication(
+			//	CertificateAuthenticationDefaults.AuthenticationScheme)
+			//	.AddCertificate();
 
 			services.AddCors(options =>
 			{
 				options.AddDefaultPolicy(
 					builder =>
 					{
-						builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+						builder.AllowAnyOrigin()
+							.AllowAnyHeader()
+							.AllowAnyMethod();
 					});
 			});
 		}
@@ -79,9 +82,9 @@ namespace SmartGarden.API
 
 			app.UseRouting();
 
-			app.UseAuthorization();
 			app.UseAuthentication();
-
+			app.UseAuthorization();
+			
 			app.UseCors();
 
 			app.UseHttpsRedirection();

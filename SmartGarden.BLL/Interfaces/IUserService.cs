@@ -11,6 +11,10 @@ namespace SmartGarden.BLL.Interfaces
 
 		Task<UserDTO> FindUserAsync(Login login);
 
+		Task<ViewUserDTO> FindUserByIdAsync(int id);
+
 		Task CreateAsync(CreateUserDTO userToCreate);
+
+		Task<bool> ExistEmailAsync(string email);
 	}
 }

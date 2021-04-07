@@ -47,7 +47,7 @@ namespace SmartGarden.Auth.API.Controllers
 				});
 			}
 
-			return Unauthorized();
+			return BadRequest("Error email or password!");
 		}
 
 		private string GenerateJWT(UserDTO user)

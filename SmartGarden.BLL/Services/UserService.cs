@@ -27,6 +27,7 @@ namespace SmartGarden.BLL.Services
 		public async Task CreateAsync(CreateUserDTO userToCreate)
 		{
 			var user = mapper.Map<User>(userToCreate);
+			user.Email = user.Email.ToLower();
 
 			HashAlgorithm hashAlgoritm = new HashAlgorithm();
 			user.Password = hashAlgoritm.CreateMD5(userToCreate.Password);
@@ -52,6 +53,18 @@ namespace SmartGarden.BLL.Services
 		{
 			var users = await userRepository.FindWithIncludesAsync(null);
 			return mapper.Map<IEnumerable<ViewUserDTO>>(users);
+		}
+
+		public async Task<ViewUserDTO> FindUserByIdAsync(int userId)
+		{
+			var user = await userRepository.FindByIdAsync(userId);
+			return mapper.Map<ViewUserDTO>(user);
+		}
+
+		public async Task<bool> ExistEmailAsync(string email)
+		{
+			var users = await userRepository.FindAsync(u => u.Email == email.ToLower());
+			return users.Count() > 0 ? true : false;
 		}
 	}
 }

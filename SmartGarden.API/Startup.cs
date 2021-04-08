@@ -21,8 +21,6 @@ namespace SmartGarden.API
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-
-
 			var authOptions = Configuration.GetSection("Auth").Get<AuthOptions>();
 			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 				.AddJwtBearer(options =>
@@ -46,6 +44,7 @@ namespace SmartGarden.API
 
 			string connectionString = Configuration.GetConnectionString("DefaultConnection");
 			services.AddContextService(connectionString);
+			services.AddBackupService(connectionString);
 
 			services.AddServices();
 			services.AddAutoMapper();

@@ -39,5 +39,9 @@ namespace SmartGarden.BLL.Infrastructure
 			services.AddSingleton<IActionService, ActionService>();
 		}
 
+		public static void AddBackupService(this IServiceCollection services, string connectionString)
+		{
+			services.AddTransient<IBackupService>(b => new BackupService(connectionString));
+		}
 	}
 }

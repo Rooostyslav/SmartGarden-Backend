@@ -10,6 +10,8 @@ namespace SmartGarden.BLL.Interfaces
 
 		Task<ViewPlantDTO> FindPlantByIdAsync(int id);
 
+		Task<IEnumerable<ViewPlantDTO>> FindPlantsByUserAsync(int userId);
+
 		Task CreateAsync(CreatePlantDTO plantToCreate);
 
 		Task DeleteAsync(int id);

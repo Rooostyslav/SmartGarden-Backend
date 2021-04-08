@@ -36,7 +36,8 @@ namespace SmartGarden.BLL.Services
 
 		public async Task<IEnumerable<ViewGardenDTO>> FindGardenByUserAsync(int userId)
 		{
-			var gardens = await gardenRepository.FindWithIncludesAsync(g => g.UserId == userId);
+			var gardens = await gardenRepository
+				.FindWithIncludesAsync(g => g.UserId == userId);
 			return mapper.Map<IEnumerable<ViewGardenDTO>>(gardens);
 		}
 	}

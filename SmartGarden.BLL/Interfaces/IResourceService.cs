@@ -6,6 +6,8 @@ namespace SmartGarden.BLL.Interfaces
 {
 	public interface IResourceService
 	{
+		Task<IEnumerable<ViewResourceDTO>> FindResourcesByUserAsync(int userId);
+
 		Task<IEnumerable<ViewResourceDTO>> FindResourcesByGardenAsync(int gardenId);
 	}
 }

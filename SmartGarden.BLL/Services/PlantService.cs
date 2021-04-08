@@ -38,14 +38,23 @@ namespace SmartGarden.BLL.Services
 
 		public async Task<ViewPlantDTO> FindPlantByIdAsync(int id)
 		{
-			var plants = await plantRepository.FindWithIncludesAsync(p => p.Id == id);
+			var plants = await plantRepository
+				.FindWithIncludesAsync(p => p.Id == id);
 			var plant = plants.FirstOrDefault();
 			return mapper.Map<ViewPlantDTO>(plant);
 		}
 
 		public async Task<IEnumerable<ViewPlantDTO>> FindPlantsByGardenAsync(int gardenId)
 		{
-			var plants = await plantRepository.FindWithIncludesAsync(p => p.GardenId == gardenId);
+			var plants = await plantRepository
+				.FindWithIncludesAsync(p => p.GardenId == gardenId);
+			return mapper.Map<IEnumerable<ViewPlantDTO>>(plants);
+		}
+
+		public async Task<IEnumerable<ViewPlantDTO>> FindPlantsByUserAsync(int userId)
+		{
+			var plants = await plantRepository
+				.FindWithIncludesAsync(p => p.Garden.UserId == userId);
 			return mapper.Map<IEnumerable<ViewPlantDTO>>(plants);
 		}
 

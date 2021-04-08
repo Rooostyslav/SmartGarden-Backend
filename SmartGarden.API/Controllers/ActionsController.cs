@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SmartGarden.API.Claims;
 using SmartGarden.BLL.DTO.Actions;
 using SmartGarden.BLL.Interfaces;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SmartGarden.API.Controllers
@@ -16,6 +19,46 @@ namespace SmartGarden.API.Controllers
 		public ActionsController(IActionService actionService)
 		{
 			this.actionService = actionService;
+		}
+
+		[HttpGet("my")]
+		public async Task<IActionResult> GetMyActions()
+		{
+			string userIdString = User.FindFirst(x => x.Type == ClaimTypes.Id).Value;
+
+			if (!Int32.TryParse(userIdString, out int userId))
+			{
+				return NotFound();
+			}
+
+			var actions = await actionService.FindActionsByUserAsync(userId);
+
+			if (actions.Count() > 0)
+			{
+				return Ok(actions);
+			}
+
+			return NoContent();
+		}
+
+		[HttpGet("my/unfulfiled")]
+		public async Task<IActionResult> GetMyUnfulfiledActions()
+		{
+			string userIdString = User.FindFirst(x => x.Type == ClaimTypes.Id).Value;
+
+			if (!Int32.TryParse(userIdString, out int userId))
+			{
+				return NotFound();
+			}
+
+			var unfulfiledActions = await actionService.FindUnfulfiledActionsByUserAsync(userId);
+
+			if (unfulfiledActions.Count() > 0)
+			{
+				return Ok(unfulfiledActions);
+			}
+
+			return NoContent();
 		}
 
 		[HttpGet("{actionId}")]

@@ -63,7 +63,8 @@ namespace SmartGarden.BLL.Services
 
 		public async Task<bool> ExistEmailAsync(string email)
 		{
-			var users = await userRepository.FindAsync(u => u.Email == email.ToLower());
+			var users = await userRepository
+				.FindAsync(u => u.Email == email.ToLower());
 			return users.Count() > 0 ? true : false;
 		}
 	}

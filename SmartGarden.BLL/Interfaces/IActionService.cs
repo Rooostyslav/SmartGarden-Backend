@@ -10,6 +10,10 @@ namespace SmartGarden.BLL.Interfaces
 
 		Task<ActionDTO> FindActionByIdAsync(int id);
 
+		Task<IEnumerable<ViewActionDTO>> FindActionsByUserAsync(int userId);
+
+		Task<IEnumerable<ViewActionDTO>> FindUnfulfiledActionsByUserAsync(int userId);
+
 		Task CreateAsync(CreateActionDTO actionToCreate);
 
 		Task UpdateAsync(UpdateActionDTO actionToUpdate);

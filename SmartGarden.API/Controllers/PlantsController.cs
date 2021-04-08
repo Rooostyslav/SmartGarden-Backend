@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SmartGarden.API.Claims;
 using SmartGarden.BLL.DTO.Plants;
 using SmartGarden.BLL.Interfaces;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,6 +21,26 @@ namespace SmartGarden.API.Controllers
 		{
 			this.plantService = plantService;
 			this.actionService = actionService;
+		}
+
+		[HttpGet("my")]
+		public async Task<IActionResult> GetPlantById()
+		{
+			string userIdString = User.FindFirst(x => x.Type == ClaimTypes.Id).Value;
+
+			if (!Int32.TryParse(userIdString, out int userId))
+			{
+				return NotFound();
+			}
+
+			var plants = await plantService.FindPlantsByUserAsync(userId);
+
+			if (plants.Count() > 0)
+			{
+				return Ok(plants);
+			}
+
+			return NotFound();
 		}
 
 		[HttpGet("{plantId}")]

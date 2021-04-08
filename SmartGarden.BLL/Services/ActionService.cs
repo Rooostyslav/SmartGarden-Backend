@@ -37,14 +37,30 @@ namespace SmartGarden.BLL.Services
 
 		public async Task<ActionDTO> FindActionByIdAsync(int id)
 		{
-			var actions = await actionRepository.FindWithIncludesAsync(a => a.Id == id);
+			var actions = await actionRepository
+				.FindWithIncludesAsync(a => a.Id == id);
 			var action = actions.FirstOrDefault();
 			return mapper.Map<ActionDTO>(action);
 		}
 
 		public async Task<IEnumerable<ViewActionDTO>> FindActionsByPlantAsync(int plantId)
 		{
-			var actions = await actionRepository.FindWithIncludesAsync(a => a.PlantId == plantId);
+			var actions = await actionRepository
+				.FindWithIncludesAsync(a => a.PlantId == plantId);
+			return mapper.Map<IEnumerable<ViewActionDTO>>(actions);
+		}
+
+		public async Task<IEnumerable<ViewActionDTO>> FindActionsByUserAsync(int userId)
+		{
+			var actions = await actionRepository
+				.FindWithIncludesAsync(a => a.Plant.Garden.UserId == userId);
+			return mapper.Map<IEnumerable<ViewActionDTO>>(actions);
+		}
+
+		public async Task<IEnumerable<ViewActionDTO>> FindUnfulfiledActionsByUserAsync(int userId)
+		{
+			var actions = await actionRepository
+				.FindWithIncludesAsync(a => a.Status == false && a.Plant.Garden.UserId == userId);
 			return mapper.Map<IEnumerable<ViewActionDTO>>(actions);
 		}
 

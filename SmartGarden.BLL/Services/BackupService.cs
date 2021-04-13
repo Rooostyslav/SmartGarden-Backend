@@ -1,6 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
 using SmartGarden.BLL.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SmartGarden.BLL.Services
@@ -8,36 +11,62 @@ namespace SmartGarden.BLL.Services
 	public class BackupService : IBackupService
 	{
         private const string backupsFolder = @"C:\Backups\";
-		private readonly string connectionString;
+        private readonly SqlConnectionStringBuilder sqlConnectionStringBuilder;
+        private readonly string connectionString;
+        private readonly string connectionStringToMaster;
 
         public string BackupsFolder => backupsFolder;
 
-		public BackupService(string connectionString)
+		public BackupService(string connectionString, string connectionStringToMaster)
 		{
-			this.connectionString = connectionString;
+            sqlConnectionStringBuilder = new SqlConnectionStringBuilder(connectionString);
+            this.connectionString = connectionString;
+            this.connectionStringToMaster = connectionStringToMaster;
 		}
 
-		public async Task<string> CreateBackupAsync()
+        public IEnumerable<string> FindAllBackupsFileNames()
+        {
+            string[] filesWithPaths = Directory.GetFiles(backupsFolder);
+            return filesWithPaths.Select(file => Path.GetFileName(file));
+        }
+
+        public async Task<string> CreateBackupAsync()
 		{
-            var sqlConStrBuilder = new SqlConnectionStringBuilder(connectionString);
+            var backupFileName = String.Format("{0}{1}-{2}_{3}.bak", 
+                backupsFolder, 
+                sqlConnectionStringBuilder.InitialCatalog,
+                DateTime.Now.ToString("yyyy-MM-dd"),
+                DateTime.Now.ToString("HH-mm"));
 
-            var backupFileName = String.Format("{0}{1}-{2}.bak",
-                backupsFolder, sqlConStrBuilder.InitialCatalog,
-                DateTime.Now.ToString("yyyy-MM-dd"));
+            var query = String.Format("BACKUP DATABASE {0} TO DISK='{1}'",
+                    sqlConnectionStringBuilder.InitialCatalog,
+                    backupFileName);
 
-            using (var connection = new SqlConnection(sqlConStrBuilder.ConnectionString))
+            await ExecuteQueryAsync(query, connectionString);
+
+            return backupFileName;
+        }
+
+		public async Task ApplyBackup(string backupFileName)
+		{
+            var query = String.Format("RESTORE DATABASE {0} FROM " +
+                "DISK='C:\\Backups\\{1}' WITH REPLACE",
+                sqlConnectionStringBuilder.InitialCatalog,
+                backupFileName);
+
+            await ExecuteQueryAsync(query, connectionStringToMaster);
+        }
+
+        public async Task<int> ExecuteQueryAsync(string query, string connectionString)
+		{
+            using (var connection = new SqlConnection(connectionString))
             {
-                var query = String.Format("BACKUP DATABASE {0} TO DISK='{1}'",
-                    sqlConStrBuilder.InitialCatalog, backupFileName);
-
                 using (var command = new SqlCommand(query, connection))
                 {
                     connection.Open();
-                    await command.ExecuteNonQueryAsync();
+                    return await command.ExecuteNonQueryAsync();
                 }
             }
-
-            return backupFileName;
         }
 	}
 }

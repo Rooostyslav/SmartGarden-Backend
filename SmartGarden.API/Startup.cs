@@ -44,11 +44,13 @@ namespace SmartGarden.API
 
 			string connectionString = Configuration.GetConnectionString("DefaultConnection");
 			services.AddContextService(connectionString);
-			services.AddBackupService(connectionString);
+
+			string connectionStringToMaster = Configuration.GetConnectionString("ConnectionToMaster");
+			services.AddBackupService(connectionString, connectionStringToMaster);
 
 			services.AddServices();
 			services.AddAutoMapper();
-			services.AddControllers();
+			services.AddControllers().AddNewtonsoftJson();
 			services.AddAuthorization();
 
 			//services.AddControllersWithViews()

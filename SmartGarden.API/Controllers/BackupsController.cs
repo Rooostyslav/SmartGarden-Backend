@@ -1,7 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SmartGarden.BLL.DTO.Backups;
 using SmartGarden.BLL.Interfaces;
 
 namespace SmartGarden.API.Controllers
@@ -19,6 +22,20 @@ namespace SmartGarden.API.Controllers
 		}
 
 		[HttpGet]
+		public async Task<IActionResult> GetAllBackupsFilesNames()
+		{
+			var backupsFileNames = await Task.Run(() => backupService.FindAllBackupsFileNames());
+
+			if (backupsFileNames.Count() > 0)
+			{
+				return Ok(backupsFileNames);
+			}
+
+			return NoContent();
+		}
+
+		[Route("create")]
+		[HttpGet]
 		public async Task<IActionResult> CreateBackup()
 		{
 			string physicalPath = await backupService.CreateBackupAsync();
@@ -27,6 +44,14 @@ namespace SmartGarden.API.Controllers
 			string contentType = "application/bak";
 
 			return PhysicalFile(physicalPath, contentType, fileName);
+		}
+
+		[HttpPost("apply")]
+		public async Task<IActionResult> ApplyBackup([FromBody] Backup backup)
+		{
+			await backupService.ApplyBackup(backup.FileName);
+
+			return Ok();
 		}
 	}
 }

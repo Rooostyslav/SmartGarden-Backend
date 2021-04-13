@@ -24,7 +24,7 @@ namespace SmartGarden.API.Controllers
 		}
 
 		[HttpGet("my")]
-		public async Task<IActionResult> GetPlantById()
+		public async Task<IActionResult> GetMyPlants()
 		{
 			string userIdString = User.FindFirst(x => x.Type == ClaimTypes.Id).Value;
 
@@ -61,10 +61,7 @@ namespace SmartGarden.API.Controllers
 		{
 			double plantCondition = await plantService.PlantCondition(plantId);
 
-			return Ok(new 
-			{
-				condition = plantCondition
-			});
+			return Ok(plantCondition);
 		}
 
 		[HttpPost]

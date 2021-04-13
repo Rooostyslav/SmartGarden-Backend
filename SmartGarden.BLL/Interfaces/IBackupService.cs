@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SmartGarden.BLL.Interfaces
 {
@@ -6,6 +7,10 @@ namespace SmartGarden.BLL.Interfaces
 	{
 		string BackupsFolder { get; }
 
+		IEnumerable<string> FindAllBackupsFileNames();
+
 		Task<string> CreateBackupAsync();
+
+		Task ApplyBackup(string backupFileName);
 	}
 }

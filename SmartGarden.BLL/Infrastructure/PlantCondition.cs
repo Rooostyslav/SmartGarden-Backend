@@ -40,10 +40,13 @@ namespace SmartGarden.BLL.Infrastructure
 			var realizedActions = allActions.Where(a => a.Status);
 			int countRealizedActions = realizedActions.Count();
 
-			double oneActionRate = actionsMaxRate / countAllActions;
-			double actionsRate = (countRealizedActions * oneActionRate);
-
-			return actionsRate;
+			double oneActionRate = 1;
+			if (countAllActions != 0)
+			{
+				 oneActionRate = actionsMaxRate / countAllActions;
+			}
+			
+			return (countRealizedActions * oneActionRate);
 		}
 
 		private async Task<double> CalculateResourcesRate(int gardenId)
@@ -51,11 +54,14 @@ namespace SmartGarden.BLL.Infrastructure
 			var resousces = await unitOfWork.Resourсes.FindWithIncludesAsync(r => r.GardenId == gardenId);
 			int countResources = resousces.Count();
 
-			double oneResourceRate = resourcesMaxRate / countResources;
+			double oneResourceRate = 1;
+			if (countResources != 0)
+			{
+				oneResourceRate = resourcesMaxRate / countResources;
+			}
+			
 			int sufficientResources = resousces.Where(r => r.Amount >= enoughResources).Count();
-			double resourcesRate = sufficientResources * oneResourceRate;
-
-			return resourcesRate;
+			return (sufficientResources * oneResourceRate);
 		}
 	}
 }

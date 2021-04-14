@@ -7,5 +7,7 @@ namespace SmartGarden.BLL.DTO.Plants
 		public string Description { get; set; }
 
 		public string Location { get; set; }
+
+		public int GardenId { get; set; }
 	}
 }

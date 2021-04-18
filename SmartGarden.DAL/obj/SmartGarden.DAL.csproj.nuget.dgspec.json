@@ -1,23 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj": {}
+    "E:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj": {}
   },
   "projects": {
-    "D:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj": {
+    "E:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj",
+        "projectUniqueName": "E:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj",
         "projectName": "SmartGarden.DAL",
-        "projectPath": "D:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj",
+        "projectPath": "E:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj",
         "packagesPath": "C:\\Users\\diffd\\.nuget\\packages\\",
-        "outputPath": "D:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\obj\\",
+        "outputPath": "E:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
           "C:\\Users\\diffd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -30,6 +32,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -41,6 +44,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -66,7 +70,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.407\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

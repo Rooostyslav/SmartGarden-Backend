@@ -5764,22 +5764,25 @@
   },
   "packageFolders": {
     "C:\\Users\\diffd\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.BLL\\SmartGarden.BLL.csproj",
+      "projectUniqueName": "E:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.BLL\\SmartGarden.BLL.csproj",
       "projectName": "SmartGarden.BLL",
-      "projectPath": "D:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.BLL\\SmartGarden.BLL.csproj",
+      "projectPath": "E:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.BLL\\SmartGarden.BLL.csproj",
       "packagesPath": "C:\\Users\\diffd\\.nuget\\packages\\",
-      "outputPath": "D:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.BLL\\obj\\",
+      "outputPath": "E:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.BLL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
         "C:\\Users\\diffd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -5792,9 +5795,10 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj": {
-              "projectPath": "D:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj"
+            "E:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj": {
+              "projectPath": "E:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj"
             }
           }
         }
@@ -5807,6 +5811,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "AutoMapper": {
             "target": "Package",
@@ -5828,7 +5833,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.407\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -26,7 +26,6 @@ namespace SmartGarden.API.Controllers
 			this.resourceService = resourceService;
 		}
 
-		[Authorize(Roles = "admin, user")]
 		[HttpGet("my")]
 		public async Task<IActionResult> GetMyGardens()
 		{
@@ -89,6 +88,17 @@ namespace SmartGarden.API.Controllers
 		[HttpPost]
 		public async Task<IActionResult> CreateGarden([FromBody] CreateGardenDTO garden)
 		{
+			if (garden.UserId == 0)
+			{
+				string userIdString = User.FindFirst(x => x.Type == ClaimTypes.Id).Value;
+				if (!Int32.TryParse(userIdString, out int userId))
+				{
+					return NotFound();
+				}
+
+				garden.UserId = userId;
+			}
+
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1lSYwQDLU0P0T20IW+g6YQ3u8+ZT7hbvDQtNCfXdnZD4KqIxPCYvXM779Z93Ri6bHBDYITxWP6pO+3bu/zejBw==",
+  "dgSpecHash": "QGbCMZW2V4O0MTRlDlqnHQccU87dCeIveP+5Da2Q6WTBjqLvLsfF1HpclhgR/7zXOPaErQGyqySc+PjI6xIEnQ==",
   "success": true,
-  "projectFilePath": "D:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.API\\SmartGarden.API.csproj",
+  "projectFilePath": "E:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.API\\SmartGarden.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\diffd\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\diffd\\.nuget\\packages\\microsoft.aspnetcore.authentication.certificate\\3.1.0\\microsoft.aspnetcore.authentication.certificate.3.1.0.nupkg.sha512",

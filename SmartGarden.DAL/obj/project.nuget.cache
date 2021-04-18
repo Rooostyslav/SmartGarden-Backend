@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EjNKsnzreIeGskLhxDetNwMCQPZokKtei3caRP9I11dSOyXmaqTPNy4IN8+uqovM4lc/45a1SDlPCbt/2tOdlQ==",
+  "dgSpecHash": "h3nm91Y1ILW4pnTSV4WpzbEPJKakWWq0nLejpU4H0RvfPA3ZPQmNHVQG/j/25fFVVPHTg17UaUmfkSC+nMCpmQ==",
   "success": true,
-  "projectFilePath": "D:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj",
+  "projectFilePath": "E:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.DAL\\SmartGarden.DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\diffd\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\diffd\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",

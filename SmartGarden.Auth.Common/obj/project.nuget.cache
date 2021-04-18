@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "M971NE6Yh6kqwJWTiqA34l82GqQFRtKjE2A5eqjufYlwOQNlqEnqgakdHQv0sEH3Fx5DeiWDhBeg2AHB6qG2ug==",
+  "dgSpecHash": "ZIKwbYmrzf4M19aXuI5JG0i7hEDbZHLQrhqrdPvgV2ULIilwlB++pqnNRHtQuxuos830VyoCZ/vch0Uqx6TAuQ==",
   "success": true,
-  "projectFilePath": "D:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.Auth.Common\\SmartGarden.Auth.Common.csproj",
+  "projectFilePath": "E:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.Auth.Common\\SmartGarden.Auth.Common.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\diffd\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\diffd\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\2.1.1\\microsoft.extensions.caching.abstractions.2.1.1.nupkg.sha512",

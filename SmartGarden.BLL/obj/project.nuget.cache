@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "y1QkbQznReucXC1eIxVwjcDqjLX9YmnBCwcSilgK0digxUCB4TPfDx2ClEByLXG1a6mnP5P61qTs7j3hJA53iA==",
+  "dgSpecHash": "9Ig66s9+niNynXpY9ss4jMdXRy4fjHagkGjnVAYycBY6ZRAuMC08b0yIKiN8uTlBdXBpNyacGFQuLGsujzhRew==",
   "success": true,
-  "projectFilePath": "D:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.BLL\\SmartGarden.BLL.csproj",
+  "projectFilePath": "E:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.BLL\\SmartGarden.BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\diffd\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\diffd\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sOxX0D8Tk6eN+4GO9UdTEswtQwXCyMA7WOXBU5St5/adk8X748NdCJLzesd4e4D7M/xKebZFpn3LTe54h7m45A==",
+  "dgSpecHash": "+rvSmSan8GJIER86aaS8LxlLV2HHRr3QlkUc9yW7LO5v53HWCcj4mAicoL/f2dCuPsZ17g/mKY5tHeXiVl6Mvg==",
   "success": true,
-  "projectFilePath": "D:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.Auth.API\\SmartGarden.Auth.API.csproj",
+  "projectFilePath": "E:\\ХНУРЕ\\3Курс\\2Семестр\\АПЗ\\Проект\\SmartGarden\\SmartGarden.Auth.API\\SmartGarden.Auth.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\diffd\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\diffd\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

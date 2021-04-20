@@ -30,6 +30,7 @@ namespace SmartGarden.BLL.Infrastructure
 			CreateMap<Action, ViewActionDTO>();
 
 			CreateMap<Resource, ResourceDTO>().ReverseMap();
+			CreateMap<CreateResourceDTO, Resource>();
 			CreateMap<Resource, ViewResourceDTO>();
 		}
 	}

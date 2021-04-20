@@ -16,11 +16,14 @@ namespace SmartGarden.API.Controllers
 	{
 		private readonly IPlantService plantService;
 		private readonly IActionService actionService;
+		private readonly IGardenService gardenService;
 
-		public PlantsController(IPlantService plantService, IActionService actionService)
+		public PlantsController(IPlantService plantService, IActionService actionService,
+			IGardenService gardenService)
 		{
 			this.plantService = plantService;
 			this.actionService = actionService;
+			this.gardenService = gardenService;
 		}
 
 		[HttpGet("my")]
@@ -70,6 +73,19 @@ namespace SmartGarden.API.Controllers
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
+			}
+
+			if (plant.GardenId == 0)
+			{
+				string userIdString = User.FindFirst(x => x.Type == ClaimTypes.Id).Value;
+
+				if (!Int32.TryParse(userIdString, out int userId))
+				{
+					return NotFound();
+				}
+
+				var gardens = await gardenService.FindGardenByUserAsync(userId);
+				plant.GardenId = gardens.First().Id;
 			}
 
 			await plantService.CreateAsync(plant);

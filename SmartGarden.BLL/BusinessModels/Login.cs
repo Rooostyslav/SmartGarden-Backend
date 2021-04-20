@@ -5,7 +5,6 @@ namespace SmartGarden.BLL.BusinessModels
 	public class Login
 	{
 		[Required]
-		[EmailAddress]
 		public string Email { get; set; }
 
 		[Required]

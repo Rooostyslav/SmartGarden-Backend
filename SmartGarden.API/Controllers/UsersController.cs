@@ -57,7 +57,7 @@ namespace SmartGarden.API.Controllers
 			return NotFound();
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin, user")]
 		[HttpGet]
 		public async Task<IActionResult> GetUsers()
 		{
@@ -85,6 +85,7 @@ namespace SmartGarden.API.Controllers
 			return NoContent();
 		}
 
+		[HttpPost]
 		public async Task<IActionResult> CreateUser([FromBody] CreateUserDTO user)
 		{
 			if (user.Role == String.Empty || user.Role == null)

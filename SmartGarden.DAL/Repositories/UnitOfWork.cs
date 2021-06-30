@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SmartGarden.DAL.EF;
+﻿using SmartGarden.DAL.EF;
 using SmartGarden.DAL.Interfaces;
 using System.Threading.Tasks;
 
@@ -14,11 +13,9 @@ namespace SmartGarden.DAL.Repositories
 		private IActionRepository actionRepository;
 		private IResourсeRepository resourсeRepository;
 
-		public UnitOfWork(string connectionString)
+		public UnitOfWork(SmartGardenContext context)
 		{
-			var optionBuilder = new DbContextOptionsBuilder<SmartGardenContext>();
-			optionBuilder.UseSqlServer(connectionString);
-			smartGardenContext = new SmartGardenContext(optionBuilder.Options);
+			smartGardenContext = context;
 		}
 
 		public IUserRepository Users

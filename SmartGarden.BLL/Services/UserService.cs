@@ -41,6 +41,8 @@ namespace SmartGarden.BLL.Services
 			HashAlgorithm hashAlgoritm = new HashAlgorithm();
 			var passwordMD5 = hashAlgoritm.CreateMD5(login.Password);
 
+			var u = await userRepository.FindWithIncludesAsync(null);
+
 			var users = await userRepository
 				.FindWithIncludesAsync(u => u.Email.ToLower() == login.Email.ToLower()
 				 && u.Password == passwordMD5);

@@ -16,7 +16,7 @@ namespace SmartGarden.BLL.Infrastructure
 			services.AddDbContext<SmartGardenContext>(options =>
 				options.UseSqlServer(connectionString));
 
-			services.AddTransient<IUnitOfWork>(u => new UnitOfWork(connectionString));
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
 		}
 
 		public static void AddAutoMapper(this IServiceCollection services)
@@ -32,17 +32,17 @@ namespace SmartGarden.BLL.Infrastructure
 
 		public static void AddServices(this IServiceCollection services)
 		{
-			services.AddSingleton<IUserService, UserService>();
-			services.AddSingleton<IGardenService, GardenService>();
-			services.AddSingleton<IPlantService, PlantService>();
-			services.AddSingleton<IResourceService, ResourceService>();
-			services.AddSingleton<IActionService, ActionService>();
+			services.AddScoped<IUserService, UserService>();
+			services.AddScoped<IGardenService, GardenService>();
+			services.AddScoped<IPlantService, PlantService>();
+			services.AddScoped<IResourceService, ResourceService>();
+			services.AddScoped<IActionService, ActionService>();
 		}
 
 		public static void AddBackupService(this IServiceCollection services, string connectionString,
 			string connectionStringToMaster)
 		{
-			services.AddTransient<IBackupService>(b => 
+			services.AddScoped<IBackupService>(b => 
 				new BackupService(connectionString, connectionStringToMaster));
 		}
 	}

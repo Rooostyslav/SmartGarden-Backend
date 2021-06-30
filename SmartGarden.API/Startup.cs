@@ -41,7 +41,6 @@ namespace SmartGarden.API
 					};
 				});
 
-
 			string connectionString = Configuration.GetConnectionString("DefaultConnection");
 			services.AddContextService(connectionString);
 
@@ -52,15 +51,6 @@ namespace SmartGarden.API
 			services.AddAutoMapper();
 			services.AddControllers().AddNewtonsoftJson();
 			services.AddAuthorization();
-
-			//services.AddControllersWithViews()
-			//	.AddNewtonsoftJson(options =>
-			//		options.SerializerSettings.ReferenceLoopHandling =
-			//		Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
-			//services.AddAuthentication(
-			//	CertificateAuthenticationDefaults.AuthenticationScheme)
-			//	.AddCertificate();
 
 			services.AddCors(options =>
 			{

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartGarden.DAL.EF;
-using SmartGarden.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,57 +8,82 @@ using System.Threading.Tasks;
 
 namespace SmartGarden.DAL.Repositories
 {
-	public class Repository<TEntity> : IRepository<TEntity> where TEntity: class
+	public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 	{
-		private readonly SmartGardenContext smartGardenContext;
+		private SmartGardenContext _context;
+		private DbSet<TEntity> _dbSet;
 
-		public Repository(SmartGardenContext smartGardenContext)
+		public Repository(SmartGardenContext context)
 		{
-			this.smartGardenContext = smartGardenContext;
+			_context = context;
+			_dbSet = context.Set<TEntity>();
 		}
 
-		public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate)
+		public async Task<IEnumerable<TEntity>> GetAllAsync(
+			Expression<Func<TEntity, bool>> filter = null, 
+			Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, 
+			string includeProperties = "")
 		{
-			IQueryable<TEntity> entities = smartGardenContext.Set<TEntity>();
+			IQueryable<TEntity> query = _dbSet;
 
-			if (predicate != null)
+			if (filter != null)
 			{
-				entities = entities.Where(predicate);
+				query = query.Where(filter);
 			}
 
-			return await entities.ToListAsync();
-		}
-
-		public async Task<TEntity> FindByIdAsync(object id)
-		{
-			return await smartGardenContext.FindAsync<TEntity>(id);
-		}
-
-		public async Task AddAsync(TEntity entity)
-		{
-			await smartGardenContext.AddAsync(entity);
-		}
-
-		public void Update(int id, TEntity entityToUpdate)
-		{
-			smartGardenContext.Update(entityToUpdate);
-
-			//var entiny = FindByIdAsync(id).Result;
-			//smartGardenContext.Entry(entityToUpdate).State = EntityState.Modified;
-		}
-
-		public async Task DeleteAsync(object id)
-		{
-			var entityToDelete = await FindByIdAsync(id);
-			if (entityToDelete != null)
+			if (includeProperties != null)
 			{
-				Delete(entityToDelete);
+				foreach (var includeProperty in includeProperties.Split
+				(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+				{
+					query = query.Include(includeProperty);
+				}
 			}
+
+			if (orderBy != null)
+			{
+				return await orderBy(query).ToListAsync();
+			}
+
+			return await query.ToListAsync();
 		}
 
-		public void Delete(TEntity entityToDelete)
+		public async Task<TEntity> GetByIdAsync(object id)
 		{
-			smartGardenContext.Remove(entityToDelete);
+			return await _dbSet.FindAsync(id);
+		}
+
+		public async Task<TEntity> InsertAsync(TEntity entity)
+		{
+			var added = await _dbSet.AddAsync(entity);
+			return added.Entity;
+		}
+
+		public async Task<TEntity> UpdateAsync(TEntity entityToUpdate)
+		{
+			var updated = _dbSet.Attach(entityToUpdate);
+			_context.Entry(entityToUpdate).State = EntityState.Modified;
+
+			await Task.CompletedTask;
+			return updated.Entity;
+		}
+
+		public async Task<TEntity> DeleteAsync(object id)
+		{
+			TEntity entityToDelete = await _dbSet.FindAsync(id);
+			return await DeleteAsync(entityToDelete);
+		}
+
+		public async Task<TEntity> DeleteAsync(TEntity entityToDelete)
+		{
+			if (_context.Entry(entityToDelete).State == EntityState.Detached)
+			{
+				_dbSet.Attach(entityToDelete);
+			}
+
+			var deleted = _dbSet.Remove(entityToDelete);
+			await Task.CompletedTask;
+			return deleted.Entity;
 		}
 	}
 }

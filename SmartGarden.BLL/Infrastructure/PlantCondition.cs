@@ -1,4 +1,5 @@
-﻿using SmartGarden.DAL.Interfaces;
+﻿using SmartGarden.DAL.Entity.Common;
+using SmartGarden.DAL.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,7 +38,7 @@ namespace SmartGarden.BLL.Infrastructure
 			var allActions = await unitOfWork.Actions.FindWithIncludesAsync(a => a.PlantId == plantId);
 			int countAllActions = allActions.Count();
 
-			var realizedActions = allActions.Where(a => a.Status);
+			var realizedActions = allActions.Where(a => a.Status == Status.CompletedSuccessfully);
 			int countRealizedActions = realizedActions.Count();
 
 			double oneActionRate = 1;

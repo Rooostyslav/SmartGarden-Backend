@@ -2,6 +2,7 @@
 using SmartGarden.BLL.DTO.Actions;
 using SmartGarden.BLL.Interfaces;
 using SmartGarden.DAL.Entity;
+using SmartGarden.DAL.Entity.Common;
 using SmartGarden.DAL.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,7 +61,7 @@ namespace SmartGarden.BLL.Services
 		public async Task<IEnumerable<ViewActionDTO>> FindUnfulfiledActionsByUserAsync(int userId)
 		{
 			var actions = await actionRepository
-				.FindWithIncludesAsync(a => a.Status == false && a.Plant.Garden.UserId == userId);
+				.FindWithIncludesAsync(a => a.Status == Status.InProgress && a.Plant.Garden.UserId == userId);
 			return mapper.Map<IEnumerable<ViewActionDTO>>(actions);
 		}
 

@@ -30,7 +30,7 @@ namespace SmartGarden.BLL.Services
 			user.Email = user.Email.ToLower();
 
 			HashAlgorithm hashAlgoritm = new HashAlgorithm();
-			user.Password = hashAlgoritm.CreateMD5(userToCreate.Password);
+			user.HashedPassword = hashAlgoritm.CreateMD5(userToCreate.Password);
 			
 			await userRepository.AddAsync(user);
 			await unitOfWork.SaveAsync();
@@ -45,7 +45,7 @@ namespace SmartGarden.BLL.Services
 
 			var users = await userRepository
 				.FindWithIncludesAsync(u => u.Email.ToLower() == login.Email.ToLower()
-				 && u.Password == passwordMD5);
+				 && u.HashedPassword == passwordMD5);
 
 			var user = users.FirstOrDefault();
 			return mapper.Map<UserDTO>(user);

@@ -13,6 +13,7 @@ namespace SmartGarden.DAL.UnitOfWork
 		private IRepository<Plant> _plants;
 		private IRepository<Action> _actions;
 		private IRepository<Resource> _resourсes;
+		private IRepository<Device> _devices;
 
 		public UnitOfWork(SmartGardenContext context)
 		{
@@ -81,6 +82,19 @@ namespace SmartGarden.DAL.UnitOfWork
 				}
 
 				return _resourсes;
+			}
+		}
+
+		public IRepository<Device> Devices
+		{
+			get
+			{
+				if (_devices == null)
+				{
+					_devices = new Repository<Device>(_context);
+				}
+
+				return _devices;
 			}
 		}
 

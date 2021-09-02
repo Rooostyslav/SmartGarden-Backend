@@ -44,6 +44,7 @@ namespace SmartGarden.DAL.Entity
 		public DateTime LandingDate { get; set; }
 
 		[ForeignKey("Garden")]
+		[Column(Order = 6)]
 		public int GardenId { get; set; }
 
 		public Garden Garden { get; set; }

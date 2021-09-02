@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using SmartGarden.BLL.DTO.Plants;
-using SmartGarden.BLL.Infrastructure;
 using SmartGarden.BLL.Interfaces;
 using SmartGarden.DAL.Entity;
-using SmartGarden.DAL.Interfaces;
+using SmartGarden.DAL.Repositories;
+using SmartGarden.DAL.UnitOfWork;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SmartGarden.BLL.Services
@@ -13,55 +12,45 @@ namespace SmartGarden.BLL.Services
 	public class PlantService : IPlantService
 	{
 		private readonly IUnitOfWork unitOfWork;
-		private readonly IPlantRepository plantRepository;
+		private readonly IRepository<Plant> _plants;
 		private readonly IMapper mapper;
 
 		public PlantService(IUnitOfWork unitOfWork, IMapper mapper)
 		{
 			this.unitOfWork = unitOfWork;
-			plantRepository = unitOfWork.Plants;
+			_plants = unitOfWork.Plants;
 			this.mapper = mapper;
 		}
 
 		public async Task CreateAsync(CreatePlantDTO plantToCreate)
 		{
 			var plant = mapper.Map<Plant>(plantToCreate);
-			await plantRepository.AddAsync(plant);
+			await _plants.InsertAsync(plant);
 			await unitOfWork.SaveAsync();
 		}
 
 		public async Task DeleteAsync(int id)
 		{
-			await plantRepository.DeleteAsync(id);
+			await _plants.DeleteAsync(id);
 			await unitOfWork.SaveAsync();
 		}
 
 		public async Task<ViewPlantDTO> FindPlantByIdAsync(int id)
 		{
-			var plants = await plantRepository
-				.FindWithIncludesAsync(p => p.Id == id);
-			var plant = plants.FirstOrDefault();
+			var plant = await _plants.GetByIdAsync(id);
 			return mapper.Map<ViewPlantDTO>(plant);
 		}
 
 		public async Task<IEnumerable<ViewPlantDTO>> FindPlantsByGardenAsync(int gardenId)
 		{
-			var plants = await plantRepository
-				.FindWithIncludesAsync(p => p.GardenId == gardenId);
+			var plants = await _plants.GetAllAsync(p => p.GardenId == gardenId);
 			return mapper.Map<IEnumerable<ViewPlantDTO>>(plants);
 		}
 
 		public async Task<IEnumerable<ViewPlantDTO>> FindPlantsByUserAsync(int userId)
 		{
-			var plants = await plantRepository
-				.FindWithIncludesAsync(p => p.Garden.UserId == userId);
+			var plants = await _plants.GetAllAsync(p => p.Garden.UserId == userId);
 			return mapper.Map<IEnumerable<ViewPlantDTO>>(plants);
-		}
-
-		public async Task<double> PlantCondition(int plantId)
-		{
-			PlantCondition plantCondition = new PlantCondition(unitOfWork);
-			return await plantCondition.GetCondition(plantId);
 		}
 	}
 }

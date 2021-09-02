@@ -16,6 +16,8 @@ namespace SmartGarden.DAL.UnitOfWork
 
 		IRepository<Resource> Resources { get; }
 
+		IRepository<Device> Devices { get; }
+
 		Task SaveAsync();
 	}
 }

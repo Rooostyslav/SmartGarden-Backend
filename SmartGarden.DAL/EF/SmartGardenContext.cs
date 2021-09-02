@@ -10,6 +10,7 @@ namespace SmartGarden.DAL.EF
 		public DbSet<Plant> Plants { get; set; }
 		public DbSet<Action> Actions { get; set; }
 		public DbSet<Resource> Resources { get; set; }
+		public DbSet<Device> Devices { get; set; }
 
 		public SmartGardenContext(DbContextOptions<SmartGardenContext> options)
 			: base(options)

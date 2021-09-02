@@ -27,23 +27,29 @@ namespace SmartGarden.DAL.Entity
 		[Column(Order = 4)]
 		[StringLength(50)]
 		[DataType(DataType.Text)]
+		public string Address { get; set; }
+
+		[Column(Order = 5)]
+		[StringLength(50)]
+		[DataType(DataType.Text)]
 		public string SoilType { get; set; }
 
 		[Required]
-		[Column(Order = 5)]
+		[Column(Order = 6)]
 		public double Square { get; set; }
 
-		[Column(Order = 6)]
+		[Column(Order = 7)]
 		[StringLength(50)]
 		[DataType(DataType.Text)]
 		public string GPSCoordinates { get; set; }
 
-		[Column(Order = 7)]
+		[Column(Order = 8)]
 		[StringLength(50)]
 		[DataType(DataType.DateTime)]
 		public DateTime DateOfCreation { get; set; }
 
 		[ForeignKey("User")]
+		[Column(Order = 9)]
 		public int UserId { get; set; }
 
 		public User User { get; set; }
@@ -52,10 +58,13 @@ namespace SmartGarden.DAL.Entity
 
 		public ICollection<Resource> Resources { get; set; }
 
+		public ICollection<Device> Devices { get; set; }
+
 		public Garden()
 		{
 			Plants = new Collection<Plant>();
 			Resources = new Collection<Resource>();
+			Devices = new Collection<Device>();
 		}
 	}
 }

@@ -4,8 +4,10 @@ using System;
 
 namespace SmartGarden.BLL.DTO.Actions
 {
-	public class ActionDTO : BaseDTO
+	public class ActionDTO
 	{
+
+
 		public DateTime Date { get; set; }
 
 		public bool Status { get; set; }

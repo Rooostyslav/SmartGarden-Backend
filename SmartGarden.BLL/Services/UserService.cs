@@ -4,7 +4,8 @@ using SmartGarden.BLL.DTO.Users;
 using SmartGarden.BLL.Infrastructure;
 using SmartGarden.BLL.Interfaces;
 using SmartGarden.DAL.Entity;
-using SmartGarden.DAL.Interfaces;
+using SmartGarden.DAL.Repositories;
+using SmartGarden.DAL.UnitOfWork;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,13 +15,13 @@ namespace SmartGarden.BLL.Services
 	public class UserService : IUserService
 	{
 		private readonly IUnitOfWork unitOfWork;
-		private readonly IUserRepository userRepository;
+		private readonly IRepository<User> _users;
 		private readonly IMapper mapper;
 
 		public UserService(IUnitOfWork unitOfWork, IMapper mapper)
 		{
 			this.unitOfWork = unitOfWork;
-			userRepository = unitOfWork.Users;
+			_users = unitOfWork.Users;
 			this.mapper = mapper;
 		}
 
@@ -32,7 +33,7 @@ namespace SmartGarden.BLL.Services
 			HashAlgorithm hashAlgoritm = new HashAlgorithm();
 			user.HashedPassword = hashAlgoritm.CreateMD5(userToCreate.Password);
 			
-			await userRepository.AddAsync(user);
+			await _users.InsertAsync(user);
 			await unitOfWork.SaveAsync();
 		}
 
@@ -41,11 +42,9 @@ namespace SmartGarden.BLL.Services
 			HashAlgorithm hashAlgoritm = new HashAlgorithm();
 			var passwordMD5 = hashAlgoritm.CreateMD5(login.Password);
 
-			var u = await userRepository.FindWithIncludesAsync(null);
-
-			var users = await userRepository
-				.FindWithIncludesAsync(u => u.Email.ToLower() == login.Email.ToLower()
-				 && u.HashedPassword == passwordMD5);
+			var users = await _users.GetAllAsync(
+				u => u.Email.ToLower() == login.Email.ToLower() &&
+				u.HashedPassword == passwordMD5);
 
 			var user = users.FirstOrDefault();
 			return mapper.Map<UserDTO>(user);
@@ -53,20 +52,20 @@ namespace SmartGarden.BLL.Services
 
 		public async Task<IEnumerable<ViewUserDTO>> FindAllUsersAsync()
 		{
-			var users = await userRepository.FindWithIncludesAsync(null);
+			var users = await _users.GetAllAsync();
 			return mapper.Map<IEnumerable<ViewUserDTO>>(users);
 		}
 
 		public async Task<ViewUserDTO> FindUserByIdAsync(int userId)
 		{
-			var user = await userRepository.FindByIdAsync(userId);
+			var user = await _users.GetByIdAsync(userId);
 			return mapper.Map<ViewUserDTO>(user);
 		}
 
 		public async Task<bool> ExistEmailAsync(string email)
 		{
-			var users = await userRepository
-				.FindAsync(u => u.Email == email.ToLower());
+			var users = await _users
+				.GetAllAsync(u => u.Email == email.ToLower());
 			return users.Count() > 0 ? true : false;
 		}
 	}

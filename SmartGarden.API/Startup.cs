@@ -47,6 +47,7 @@ namespace SmartGarden.API
 			string connectionStringToMaster = Configuration.GetConnectionString("ConnectionToMaster");
 			services.AddBackupService(connectionString, connectionStringToMaster);
 
+			services.AddUnitOfWork();
 			services.AddServices();
 			services.AddAutoMapper();
 			services.AddControllers().AddNewtonsoftJson();

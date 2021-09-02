@@ -24,11 +24,11 @@ namespace SmartGarden.Auth.API
 			var authOptionConfiguration = Configuration.GetSection("Auth");
 			services.Configure<AuthOptions>(authOptionConfiguration);
 
-			services.AddServices();
-
 			string connectionString = Configuration.GetConnectionString("DefaultConnection");
 			services.AddContextService(connectionString);
 
+			services.AddUnitOfWork();
+			services.AddServices();
 			services.AddAutoMapper();
 
 			services.AddCors(options =>

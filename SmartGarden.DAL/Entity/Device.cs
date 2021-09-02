@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartGarden.DAL.Entity
 {
-	[Table("Resources")]
-	public class Resource
+	[Table("Devices")]
+	public class Device
 	{
 		[Key, Column(Order = 1)]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,17 +18,17 @@ namespace SmartGarden.DAL.Entity
 
 		[Required]
 		[Column(Order = 3)]
-		[StringLength(50)]
-		[DataType(DataType.Text)]
-		public string Type { get; set; }
+		public bool IsActive { get; set; }
 
 		[Required]
 		[Column(Order = 4)]
-		public double Amount { get; set; }
+		public string Login { get; set; }
 
 		[Required]
 		[Column(Order = 5)]
-		public double Maximum { get; set; }
+		[StringLength(50)]
+		[DataType(DataType.Password)]
+		public string HashedPassword { get; set; }
 
 		[ForeignKey("Garden")]
 		[Column(Order = 6)]

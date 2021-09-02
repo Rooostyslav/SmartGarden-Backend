@@ -4,8 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SmartGarden.BLL.Interfaces;
 using SmartGarden.BLL.Services;
 using SmartGarden.DAL.EF;
-using SmartGarden.DAL.Interfaces;
-using SmartGarden.DAL.Repositories;
+using SmartGarden.DAL.UnitOfWork;
 
 namespace SmartGarden.BLL.Infrastructure
 {
@@ -15,19 +14,11 @@ namespace SmartGarden.BLL.Infrastructure
 		{
 			services.AddDbContext<SmartGardenContext>(options =>
 				options.UseSqlServer(connectionString));
-
-			services.AddScoped<IUnitOfWork, UnitOfWork>();
 		}
 
-		public static void AddAutoMapper(this IServiceCollection services)
+		public static void AddUnitOfWork(this IServiceCollection services)
 		{
-			var mapperConfig = new MapperConfiguration(mapperConfig =>
-			{
-				mapperConfig.AddProfile(new MappingProfile());
-			});
-
-			IMapper mapper = mapperConfig.CreateMapper();
-			services.AddSingleton(mapper);
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
 		}
 
 		public static void AddServices(this IServiceCollection services)
@@ -44,6 +35,17 @@ namespace SmartGarden.BLL.Infrastructure
 		{
 			services.AddScoped<IBackupService>(b => 
 				new BackupService(connectionString, connectionStringToMaster));
+		}
+
+		public static void AddAutoMapper(this IServiceCollection services)
+		{
+			var mapperConfig = new MapperConfiguration(mapperConfig =>
+			{
+				mapperConfig.AddProfile(new MappingProfile());
+			});
+
+			IMapper mapper = mapperConfig.CreateMapper();
+			services.AddSingleton(mapper);
 		}
 	}
 }

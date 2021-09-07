@@ -12,4 +12,8 @@
     <ProjectReference Include="..\SmartGarden.DAL\SmartGarden.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validations\" />
+  </ItemGroup>
+
 </Project>

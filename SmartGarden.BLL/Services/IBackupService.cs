@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SmartGarden.BLL.Interfaces
+namespace SmartGarden.BLL.Services
 {
 	public interface IBackupService
 	{

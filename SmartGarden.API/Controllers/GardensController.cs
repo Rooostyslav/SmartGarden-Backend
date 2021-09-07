@@ -3,40 +3,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartGarden.BLL.DTO.Gardens;
-using SmartGarden.BLL.Interfaces;
-using System;
-using SmartGarden.API.Claims;
+using SmartGarden.BLL.Services;
 
 namespace SmartGarden.API.Controllers
 {
-	[Authorize(Roles = "admin, user")]
-	[Route("api/gardens")]
 	[ApiController]
+	[Route("api/gardens")]
+	[Authorize(Roles = "admin, user")]
 	public class GardensController : ControllerBase
 	{
-		private readonly IGardenService gardenService;
-		private readonly IPlantService plantService;
-		private readonly IResourceService resourceService;
+		private readonly IGardenService _gardenService;
 
-		public GardensController(IGardenService gardenService, IPlantService plantService,
-			IResourceService resourceService)
+		public GardensController(IGardenService gardenService)
 		{
-			this.gardenService = gardenService;
-			this.plantService = plantService;
-			this.resourceService = resourceService;
+			_gardenService = gardenService;
 		}
 
-		[HttpGet("my")]
-		public async Task<IActionResult> GetMyGardens()
+		[HttpGet]
+		[Authorize]
+		public async Task<IActionResult> GetGardens()
 		{
-			string userIdString = User.FindFirst(x => x.Type == ClaimTypes.Id).Value;
-
-			if (!Int32.TryParse(userIdString, out int userId))
-			{
-				return NotFound();
-			}
-
-			var gardens = await gardenService.FindGardenByUserAsync(userId);
+			var gardens = await _gardenService.FindAllAsync();
 
 			if (gardens.Count() > 0)
 			{
@@ -46,10 +33,11 @@ namespace SmartGarden.API.Controllers
 			return NoContent();
 		}
 
-		[HttpGet("{gardenId}")]
-		public async Task<IActionResult> GetGardenById(int gardenId)
+		[HttpGet("{id}")]
+		[Authorize]
+		public async Task<IActionResult> GetGardenById(int id)
 		{
-			var garden = await gardenService.FindGardenByIdAsync(gardenId);
+			var garden = await _gardenService.FindByIdAsync(id);
 
 			if (garden != null)
 			{
@@ -59,53 +47,41 @@ namespace SmartGarden.API.Controllers
 			return NotFound();
 		}
 
-		[HttpGet("{gardenId}/plants")]
-		public async Task<IActionResult> GetPlantsByGarden(int gardenId)
-		{
-			var plants = await plantService.FindPlantsByGardenAsync(gardenId);
-
-			if (plants.Count() > 0)
-			{
-				return Ok(plants);
-			}
-
-			return NoContent();
-		}
-
-		[HttpGet("{gardenId}/resources")]
-		public async Task<IActionResult> GetResourcesByGarden(int gardenId)
-		{
-			var resources = await resourceService.FindResourcesByGardenAsync(gardenId);
-
-			if (resources.Count() > 0)
-			{
-				return Ok(resources);
-			}
-
-			return NoContent();
-		}
-
 		[HttpPost]
-		public async Task<IActionResult> CreateGarden([FromBody] CreateGardenDTO garden)
+		[AllowAnonymous]
+		public async Task<IActionResult> CreateGarden(
+			[FromBody] CreateGardenDTO gardenToCreate)
 		{
-			if (garden.UserId == 0)
-			{
-				string userIdString = User.FindFirst(x => x.Type == ClaimTypes.Id).Value;
-				if (!Int32.TryParse(userIdString, out int userId))
-				{
-					return NotFound();
-				}
+			var result = await _gardenService.CreateAsync(gardenToCreate);
 
-				garden.UserId = userId;
+			if (result != null)
+			{
+				return Ok(result);
 			}
 
-			if (!ModelState.IsValid)
+			return BadRequest("Error create!");
+		}
+
+		[HttpPut]
+		[Authorize(Roles = "admin")]
+		public async Task<IActionResult> UpdateGarden(
+			[FromBody] UpdateGardenDTO gardenToUpdate)
+		{
+			var result = await _gardenService.UpdateAsync(gardenToUpdate);
+
+			if (result != null)
 			{
-				return BadRequest(ModelState);
+				return Ok(result);
 			}
 
-			await gardenService.CreateAsync(garden);
+			return BadRequest("Error update!");
+		}
 
+		[HttpDelete("{id}")]
+		[Authorize(Roles = "admin")]
+		public async Task<IActionResult> DeleteGarden(int id)
+		{
+			await _gardenService.DeleteAsync(id);
 			return Ok();
 		}
 	}

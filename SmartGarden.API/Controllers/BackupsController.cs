@@ -2,10 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartGarden.BLL.DTO.Backups;
-using SmartGarden.BLL.Interfaces;
+using SmartGarden.BLL.Services;
 
 namespace SmartGarden.API.Controllers
 {

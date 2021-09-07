@@ -1,26 +1,24 @@
-﻿using SmartGarden.BLL.DTO.Actions;
-using SmartGarden.BLL.DTO.Gardens;
-using SmartGarden.BLL.DTO.Shared;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using SmartGarden.BLL.DTO.Gardens;
+using System;
 
 namespace SmartGarden.BLL.DTO.Plants
 {
-	public class PlantDTO : BaseDTO
+	public class PlantDTO
 	{
+		public int Id { get; set; }
+
+		public string Name { get; set; }
+
+		public string Type { get; set; }
+
 		public string Description { get; set; }
 
-		public string Location { get; set; }
+		public string GPSCoordinates { get; set; }
+
+		public DateTime LandingDate { get; set; }
 
 		public int GardenId { get; set; }
 
 		public GardenDTO Garden { get; set; }
-
-		public ICollection<ActionDTO> Actions { get; set; }
-
-		public PlantDTO()
-		{
-			Actions = new Collection<ActionDTO>();
-		}
 	}
 }

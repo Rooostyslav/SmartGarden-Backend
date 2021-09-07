@@ -24,28 +24,16 @@ namespace SmartGarden.DAL.Repositories
 			Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, 
 			string includeProperties = "")
 		{
-			IQueryable<TEntity> query = _dbSet;
-
-			if (filter != null)
-			{
-				query = query.Where(filter);
-			}
-
-			if (includeProperties != null)
-			{
-				foreach (var includeProperty in includeProperties.Split
-				(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-				{
-					query = query.Include(includeProperty);
-				}
-			}
-
-			if (orderBy != null)
-			{
-				return await orderBy(query).ToListAsync();
-			}
-
+			IQueryable<TEntity> query = GetQuery(filter, orderBy, includeProperties);
 			return await query.ToListAsync();
+		}
+
+		public async Task<TEntity> GetFirstOrDefaultAsync(
+			Expression<Func<TEntity, bool>> filter = null, 
+			string includeProperties = "")
+		{
+			IQueryable<TEntity> query = GetQuery(filter, null, includeProperties);
+			return await query.FirstOrDefaultAsync();
 		}
 
 		public async Task<TEntity> GetByIdAsync(object id)
@@ -71,7 +59,12 @@ namespace SmartGarden.DAL.Repositories
 		public async Task<TEntity> DeleteAsync(object id)
 		{
 			TEntity entityToDelete = await _dbSet.FindAsync(id);
-			return await DeleteAsync(entityToDelete);
+			if (entityToDelete != null)
+			{
+				return await DeleteAsync(entityToDelete);
+			}
+
+			return null;
 		}
 
 		public async Task<TEntity> DeleteAsync(TEntity entityToDelete)
@@ -84,6 +77,34 @@ namespace SmartGarden.DAL.Repositories
 			var deleted = _dbSet.Remove(entityToDelete);
 			await Task.CompletedTask;
 			return deleted.Entity;
+		}
+
+		private IQueryable<TEntity> GetQuery(Expression<Func<TEntity, bool>> filter = null,
+			Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, 
+			string includeProperties = "")
+		{
+			IQueryable<TEntity> query = _dbSet;
+
+			if (filter != null)
+			{
+				query = query.Where(filter);
+			}
+
+			if (includeProperties != null)
+			{
+				foreach (var includeProperty in includeProperties.Split
+				(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+				{
+					query = query.Include(includeProperty);
+				}
+			}
+
+			if (orderBy != null)
+			{
+				return orderBy(query);
+			}
+
+			return query;
 		}
 	}
 }

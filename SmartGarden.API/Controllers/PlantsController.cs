@@ -1,55 +1,43 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SmartGarden.API.Claims;
 using SmartGarden.BLL.DTO.Plants;
-using SmartGarden.BLL.Interfaces;
-using System;
+using SmartGarden.BLL.Services;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SmartGarden.API.Controllers
 {
-	[Authorize(Roles = "admin, user")]
-	[Route("api/plants")]
 	[ApiController]
+	[Route("api/plants")]
+	[Authorize(Roles = "admin, plant")]
 	public class PlantsController : ControllerBase
 	{
-		private readonly IPlantService plantService;
-		private readonly IActionService actionService;
-		private readonly IGardenService gardenService;
+		private readonly IPlantService _plantService;
 
-		public PlantsController(IPlantService plantService, IActionService actionService,
-			IGardenService gardenService)
+		public PlantsController(IPlantService plantService)
 		{
-			this.plantService = plantService;
-			this.actionService = actionService;
-			this.gardenService = gardenService;
+			_plantService = plantService;
 		}
 
-		[HttpGet("my")]
-		public async Task<IActionResult> GetMyPlants()
+		[HttpGet]
+		[Authorize]
+		public async Task<IActionResult> GetPlants()
 		{
-			string userIdString = User.FindFirst(x => x.Type == ClaimTypes.Id).Value;
-
-			if (!Int32.TryParse(userIdString, out int userId))
-			{
-				return NotFound();
-			}
-
-			var plants = await plantService.FindPlantsByUserAsync(userId);
+			var plants = await _plantService.FindAllAsync();
 
 			if (plants.Count() > 0)
 			{
 				return Ok(plants);
 			}
 
-			return NotFound();
+			return NoContent();
 		}
 
-		[HttpGet("{plantId}")]
-		public async Task<IActionResult> GetPlantById(int plantId)
+		[HttpGet("{id}")]
+		[Authorize]
+		public async Task<IActionResult> GetPlantById(int id)
 		{
-			var plant = await plantService.FindPlantByIdAsync(plantId);
+			var plant = await _plantService.FindByIdAsync(id);
 
 			if (plant != null)
 			{
@@ -60,50 +48,41 @@ namespace SmartGarden.API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreatePlant([FromBody] CreatePlantDTO plant)
+		[AllowAnonymous]
+		public async Task<IActionResult> CreatePlant(
+			[FromBody] CreatePlantDTO plantToCreate)
 		{
-			if (!ModelState.IsValid)
+			var result = await _plantService.CreateAsync(plantToCreate);
+
+			if (result != null)
 			{
-				return BadRequest(ModelState);
+				return Ok(result);
 			}
 
-			if (plant.GardenId == 0)
-			{
-				string userIdString = User.FindFirst(x => x.Type == ClaimTypes.Id).Value;
-
-				if (!Int32.TryParse(userIdString, out int userId))
-				{
-					return NotFound();
-				}
-
-				var gardens = await gardenService.FindGardenByUserAsync(userId);
-				plant.GardenId = gardens.First().Id;
-			}
-
-			await plantService.CreateAsync(plant);
-
-			return Ok();
+			return BadRequest("Error create!");
 		}
 
-		[HttpDelete("{plantId}")]
-		public async Task<IActionResult> DeletePlant(int plantId)
+		[HttpPut]
+		[Authorize(Roles = "admin")]
+		public async Task<IActionResult> UpdatePlant(
+			[FromBody] UpdatePlantDTO plantToUpdate)
 		{
-			await plantService.DeleteAsync(plantId);
+			var result = await _plantService.UpdateAsync(plantToUpdate);
 
-			return Ok();
-		}
-
-		[HttpGet("{plantId}/actions")]
-		public async Task<IActionResult> GetActionsByPlants(int plantId)
-		{
-			var actions = await actionService.FindActionsByPlantAsync(plantId);
-
-			if (actions.Count() > 0)
+			if (result != null)
 			{
-				return Ok(actions);
+				return Ok(result);
 			}
 
-			return NoContent();
+			return BadRequest("Error update!");
+		}
+
+		[HttpDelete("{id}")]
+		[Authorize(Roles = "admin")]
+		public async Task<IActionResult> DeletePlant(int id)
+		{
+			await _plantService.DeleteAsync(id);
+			return Ok();
 		}
 	}
 }

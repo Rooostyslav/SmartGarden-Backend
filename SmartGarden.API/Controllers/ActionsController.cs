@@ -2,38 +2,29 @@
 using Microsoft.AspNetCore.Mvc;
 using SmartGarden.API.Claims;
 using SmartGarden.BLL.DTO.Actions;
-using SmartGarden.BLL.Interfaces;
-using System;
+using SmartGarden.BLL.Services;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SmartGarden.API.Controllers
 {
-	[Authorize(Roles = "admin, user")]
-	[Route("api/actions")]
 	[ApiController]
+	[Route("api/actions")]
+	[Authorize(Roles = "admin, user")]
 	public class ActionsController : ControllerBase
 	{
-		private readonly IActionService actionService;
-		private readonly IPlantService plantService;
+		private readonly IActionService _actionService;
 
-		public ActionsController(IActionService actionService, IPlantService plantService)
+		public ActionsController(IActionService actionService)
 		{
-			this.actionService = actionService;
-			this.plantService = plantService;
+			_actionService = actionService;
 		}
 
-		[HttpGet("my")]
-		public async Task<IActionResult> GetMyActions()
+		[HttpGet]
+		[Authorize]
+		public async Task<IActionResult> GetUsers()
 		{
-			string userIdString = User.FindFirst(x => x.Type == ClaimTypes.Id).Value;
-
-			if (!Int32.TryParse(userIdString, out int userId))
-			{
-				return NotFound();
-			}
-
-			var actions = await actionService.FindActionsByUserAsync(userId);
+			var actions = await _actionService.FindAllAsync();
 
 			if (actions.Count() > 0)
 			{
@@ -43,87 +34,70 @@ namespace SmartGarden.API.Controllers
 			return NoContent();
 		}
 
-		[HttpGet("my/unfulfiled")]
-		public async Task<IActionResult> GetMyUnfulfiledActions()
+		[HttpGet("{id}")]
+		[Authorize]
+		public async Task<IActionResult> GetUserById(int id)
 		{
-			string userIdString = User.FindFirst(x => x.Type == ClaimTypes.Id).Value;
-
-			if (!Int32.TryParse(userIdString, out int userId))
-			{
-				return NotFound();
-			}
-
-			var unfulfiledActions = await actionService.FindUnfulfiledActionsByUserAsync(userId);
-
-			if (unfulfiledActions.Count() > 0)
-			{
-				return Ok(unfulfiledActions);
-			}
-
-			return NoContent();
-		}
-
-		[HttpGet("{actionId}")]
-		public async Task<IActionResult> GetActionById(int actionId)
-		{
-			var action = await actionService.FindActionByIdAsync(actionId);
+			var action = await _actionService.FindByIdAsync(id);
 
 			if (action != null)
 			{
 				return Ok(action);
 			}
 
-			return NoContent();
+			return NotFound();
+		}
+
+		[HttpGet("my")]
+		[Authorize]
+		public async Task<IActionResult> GetMyUser()
+		{
+			int myId = User.Id();
+			var myUser = await _actionService.FindByIdAsync(myId);
+
+			if (myUser != null)
+			{
+				return Ok(myUser);
+			}
+
+			return NotFound();
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateAction([FromBody] CreateActionDTO action)
+		[AllowAnonymous]
+		public async Task<IActionResult> CreateUser(
+			[FromBody] CreateActionDTO actionToCreate)
 		{
-			if (!ModelState.IsValid)
+			var result = await _actionService.CreateAsync(actionToCreate);
+
+			if (result != null)
 			{
-				return BadRequest(ModelState);
+				return Ok(result);
 			}
 
-			if (action.PlantId == 0)
-			{
-				string userIdString = User.FindFirst(x => x.Type == ClaimTypes.Id).Value;
-
-				if (!Int32.TryParse(userIdString, out int userId))
-				{
-					return NotFound();
-				}
-
-				var plants = await plantService.FindPlantsByUserAsync(userId);
-				int plantId = plants.First().Id;
-
-				action.PlantId = plantId;
-			}
-
-			await actionService.CreateAsync(action);
-
-			return Ok();
+			return BadRequest("Error create!");
 		}
 
-		[HttpPut("{actionId}")]
-		public async Task<IActionResult> UpdateAction(int actionId, [FromBody] UpdateActionDTO action)
+		[HttpPut]
+		[Authorize(Roles = "admin")]
+		public async Task<IActionResult> UpdateUser(
+			[FromBody] UpdateActionDTO actionToUpdate)
 		{
-			action.Id = actionId;
+			var result = await _actionService.UpdateAsync(actionToUpdate);
 
-			if (!ModelState.IsValid)
+			if (result != null)
 			{
-				return BadRequest(ModelState);
+				return Ok(result);
 			}
 
-			await actionService.UpdateAsync(action);
-
-			return Ok();
+			return BadRequest("Error update!");
 		}
 
-		[HttpDelete("{actionId}")]
-		public async Task<IActionResult> DeleteAction(int actionId)
+		[HttpDelete("{id}")]
+		[Authorize(Roles = "admin")]
+		public async Task<IActionResult> DeleteUser(int id)
 		{
-			await actionService.DeleteAsync(actionId);
-
+			await _actionService.DeleteAsync(id);
 			return Ok();
 		}
 	}

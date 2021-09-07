@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using SmartGarden.BLL.Interfaces;
 using SmartGarden.BLL.Services;
+using SmartGarden.BLL.Services.Implementations;
 using SmartGarden.DAL.EF;
 using SmartGarden.DAL.UnitOfWork;
 
@@ -28,6 +28,7 @@ namespace SmartGarden.BLL.Infrastructure
 			services.AddScoped<IPlantService, PlantService>();
 			services.AddScoped<IResourceService, ResourceService>();
 			services.AddScoped<IActionService, ActionService>();
+			services.AddScoped<IDeviceService, DeviceService>();
 		}
 
 		public static void AddBackupService(this IServiceCollection services, string connectionString,

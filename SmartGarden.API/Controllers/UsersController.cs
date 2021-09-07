@@ -1,67 +1,29 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartGarden.API.Claims;
 using SmartGarden.BLL.DTO.Users;
-using SmartGarden.BLL.Interfaces;
+using SmartGarden.BLL.Services;
 
 namespace SmartGarden.API.Controllers
 {
-	[Route("api/users")]
 	[ApiController]
+	[Route("api/users")]
 	public class UsersController : ControllerBase
 	{
-		private readonly IUserService userService;
-		private readonly IGardenService gardenService;
+		private readonly IUserService _userService;
 
-		public UsersController(IUserService userService, IGardenService gardenService)
+		public UsersController(IUserService userService)
 		{
-			this.gardenService = gardenService;
-			this.userService = userService;
+			_userService = userService;
 		}
 
-		[Authorize(Roles = "admin, user")]
-		[HttpGet("my")]
-		public async Task<IActionResult> GetMyUser()
-		{
-			string userIdString = User.FindFirst(x => x.Type == ClaimTypes.Id).Value;
-
-			if (!Int32.TryParse(userIdString, out int userId))
-			{
-				return NotFound();
-			}
-
-			var user = await userService.FindUserByIdAsync(userId);
-
-			if (user != null)
-			{
-				return Ok(user);
-			}
-
-			return NotFound();
-		}
-
-		[Authorize(Roles = "admin, user")]
-		[HttpGet("{userId}")]
-		public async Task<IActionResult> GetUser(int userId)
-		{
-			var user = await userService.FindUserByIdAsync(userId);
-
-			if (user != null)
-			{
-				return Ok(user);
-			}
-
-			return NotFound();
-		}
-
-		//[Authorize(Roles = "admin, user")]
 		[HttpGet]
+		[Authorize]
 		public async Task<IActionResult> GetUsers()
 		{
-			var users = await userService.FindAllUsersAsync();
+			var users = await _userService.FindAllAsync();
 
 			if (users.Count() > 0)
 			{
@@ -71,41 +33,70 @@ namespace SmartGarden.API.Controllers
 			return NoContent();
 		}
 
-		[Authorize(Roles = "admin, user")]
-		[HttpGet("{userId}/gardens")]
-		public async Task<IActionResult> GetGardensByUser(int userId)
+		[HttpGet("{id}")]
+		[Authorize]
+		public async Task<IActionResult> GetUserById(int id)
 		{
-			var gardens = await gardenService.FindGardenByUserAsync(userId);
+			var user = await _userService.FindByIdAsync(id);
 
-			if (gardens.Count() > 0)
+			if (user != null)
 			{
-				return Ok(gardens);
+				return Ok(user);
 			}
 
-			return NoContent();
+			return NotFound();
+		}
+
+		[HttpGet("my")]
+		[Authorize]
+		public async Task<IActionResult> GetMyUser()
+		{
+			int myId = User.Id();
+			var myUser = await _userService.FindByIdAsync(myId);
+
+			if (myUser != null)
+			{
+				return Ok(myUser);
+			}
+
+			return NotFound();
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateUser([FromBody] CreateUserDTO user)
+		[AllowAnonymous]
+		public async Task<IActionResult> CreateUser(
+			[FromBody] CreateUserDTO userToCreate)
 		{
-			if (user.Role == String.Empty || user.Role == null)
+			var result = await _userService.CreateAsync(userToCreate);
+
+			if (result != null)
 			{
-				user.Role = "user";
+				return Ok(result);
 			}
 
-			if (!ModelState.IsValid)
+			return BadRequest("Error create!");
+		}
+
+		[HttpPut]
+		[Authorize(Roles = "admin")]
+		public async Task<IActionResult> UpdateUser(
+			[FromBody] UpdateUserDTO userToUpdate)
+		{
+			var result = await _userService.UpdateAsync(userToUpdate);
+
+			if (result != null)
 			{
-				return BadRequest(ModelState);
+				return Ok(result);
 			}
 
-			bool existEmail = await userService.ExistEmailAsync(user.Email);
-			if (existEmail)
-			{
-				return BadRequest("Email already exist!");
-			}
+			return BadRequest("Error update!");
+		}
 
-			await userService.CreateAsync(user);
-
+		[HttpDelete("{id}")]
+		[Authorize(Roles = "admin")]
+		public async Task<IActionResult> DeleteUser(int id)
+		{
+			await _userService.DeleteAsync(id);
 			return Ok();
 		}
 	}

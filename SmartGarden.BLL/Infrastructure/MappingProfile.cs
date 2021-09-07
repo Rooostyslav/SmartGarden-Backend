@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SmartGarden.BLL.DTO.Actions;
+using SmartGarden.BLL.DTO.Devices;
 using SmartGarden.BLL.DTO.Gardens;
 using SmartGarden.BLL.DTO.Plants;
 using SmartGarden.BLL.DTO.Resources;
@@ -12,26 +13,29 @@ namespace SmartGarden.BLL.Infrastructure
 	{
 		public MappingProfile()
 		{
-			CreateMap<User, UserDTO>().ReverseMap();
+			CreateMap<User, UserDTO>();
 			CreateMap<CreateUserDTO, User>();
-			CreateMap<User, ViewUserDTO>();
+			CreateMap<UpdateUserDTO, User>();
 
-			CreateMap<Garden, GardenDTO>().ReverseMap();
+			CreateMap<Garden, GardenDTO>();
 			CreateMap<CreateGardenDTO, Garden>();
-			CreateMap<Garden, ViewGardenDTO>();
+			CreateMap<UpdateGardenDTO, Garden>();
 
-			CreateMap<Plant, PlantDTO>().ReverseMap();
+			CreateMap<Plant, PlantDTO>();
 			CreateMap<CreatePlantDTO, Plant>();
-			CreateMap<Plant, ViewPlantDTO>();
+			CreateMap<UpdatePlantDTO, Plant>();
 
-			CreateMap<Action, ActionDTO>().ReverseMap();
+			CreateMap<Action, ActionDTO>();
 			CreateMap<CreateActionDTO, Action>();
 			CreateMap<UpdateActionDTO, Action>();
-			CreateMap<Action, ViewActionDTO>();
 
-			CreateMap<Resource, ResourceDTO>().ReverseMap();
+			CreateMap<Resource, ResourceDTO>();
 			CreateMap<CreateResourceDTO, Resource>();
-			CreateMap<Resource, ViewResourceDTO>();
+			CreateMap<UpdateResourceDTO, Resource>();
+
+			CreateMap<Device, DeviceDTO>();
+			CreateMap<CreateDeviceDTO, Device>();
+			CreateMap<UpdateDeviceDTO, Device>();
 		}
 	}
 }

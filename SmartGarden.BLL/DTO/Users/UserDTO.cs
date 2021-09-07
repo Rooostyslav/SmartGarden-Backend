@@ -1,23 +1,19 @@
-﻿using SmartGarden.BLL.DTO.Gardens;
-using SmartGarden.BLL.DTO.Shared;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using SmartGarden.DAL.Entity.Common;
 
 namespace SmartGarden.BLL.DTO.Users
 {
-	public class UserDTO : BaseDTO
+	public class UserDTO
 	{
+		public int Id { get; set; }
+
+		public string FirstName { get; set; }
+
+		public string SecondName { get; set; }
+
 		public string Email { get; set; }
 
-		public string Password { get; set; }
+		public string HashedPassword { get; set; }
 
-		public string Role { get; set; }
-
-		public ICollection<GardenDTO> Gardens { get; set; }
-
-		public UserDTO()
-		{
-			Gardens = new Collection<GardenDTO>();
-		}
+		public Role Role { get; set; }
 	}
 }

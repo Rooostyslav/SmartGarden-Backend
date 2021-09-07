@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using SmartGarden.Auth.Common;
 using SmartGarden.BLL.BusinessModels;
 using SmartGarden.BLL.DTO.Users;
-using SmartGarden.BLL.Interfaces;
+using SmartGarden.BLL.Services;
 
 namespace SmartGarden.Auth.API.Controllers
 {
@@ -20,7 +20,8 @@ namespace SmartGarden.Auth.API.Controllers
 		private readonly IOptions<AuthOptions> authOptions;
 		private readonly IUserService userService;
 
-		public AuthController(IOptions<AuthOptions> authOptions, IUserService userService)
+		public AuthController(IOptions<AuthOptions> authOptions, 
+			IUserService userService)
 		{
 			this.authOptions = authOptions;
 			this.userService = userService;
@@ -30,13 +31,7 @@ namespace SmartGarden.Auth.API.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Login([FromBody] Login login)
 		{
-			if (!ModelState.IsValid)
-			{
-				return BadRequest(ModelState);
-			}
-
-			var user = await userService.FindUserAsync(login);
-
+			var user = await userService.FindAsync(login);
 			if (user != null)
 			{
 				var token = GenerateJWT(user);
@@ -63,7 +58,8 @@ namespace SmartGarden.Auth.API.Controllers
 				new Claim(JwtRegisteredClaimNames.Email, user.Email)
 			};
 
-			claims.Add(new Claim("role", user.Role));
+			string role = user.Role.ToString();
+			claims.Add(new Claim("role", role));
 
 			var token = new JwtSecurityToken(authParams.Issuer,
 				authParams.Audience,

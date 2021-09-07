@@ -1,11 +1,39 @@
-﻿using SmartGarden.BLL.DTO.Shared;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SmartGarden.BLL.DTO.Gardens
 {
-	public class CreateGardenDTO : BaseDTO
+	public class CreateGardenDTO
 	{
+		[Required]
+		[StringLength(50)]
+		[DataType(DataType.Text)]
+		public string Name { get; set; }
+
+		[StringLength(50)]
+		[DataType(DataType.Text)]
 		public string Description { get; set; }
 
+		[StringLength(50)]
+		[DataType(DataType.Text)]
+		public string Address { get; set; }
+
+		[StringLength(50)]
+		[DataType(DataType.Text)]
+		public string SoilType { get; set; }
+
+		[Required]
+		public double Square { get; set; }
+
+		[StringLength(50)]
+		[DataType(DataType.Text)]
+		public string GPSCoordinates { get; set; }
+
+		[StringLength(50)]
+		[DataType(DataType.DateTime)]
+		public DateTime DateOfCreation { get; set; }
+
+		[Required]
 		public int UserId { get; set; }
 	}
 }

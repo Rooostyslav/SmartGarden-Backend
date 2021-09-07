@@ -1,12 +1,11 @@
 ﻿using Microsoft.Data.SqlClient;
-using SmartGarden.BLL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SmartGarden.BLL.Services
+namespace SmartGarden.BLL.Services.Implementations
 {
 	public class BackupService : IBackupService
 	{

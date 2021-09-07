@@ -3,9 +3,9 @@ using System.Text;
 
 namespace SmartGarden.BLL.Infrastructure
 {
-	public class HashAlgorithm
+	public static class HashAlgorithm
 	{
-        public string CreateMD5(string text)
+        public static string CreateMD5(string text)
         {
             using (MD5 md5 = MD5.Create())
             {

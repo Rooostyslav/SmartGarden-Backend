@@ -13,6 +13,10 @@ namespace SmartGarden.DAL.Repositories
            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
            string includeProperties = "");
 
+        Task<TEntity> GetFirstOrDefaultAsync(
+            Expression<Func<TEntity, bool>> filter = null,
+            string includeProperties = "");
+
         Task<TEntity> GetByIdAsync(object id);
 
         Task<TEntity> InsertAsync(TEntity entity);

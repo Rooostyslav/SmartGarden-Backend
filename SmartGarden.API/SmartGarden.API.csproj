@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SmartGarden.Auth.Common\SmartGarden.Auth.Common.csproj" />
     <ProjectReference Include="..\SmartGarden.BLL\SmartGarden.BLL.csproj" />
   </ItemGroup>
 

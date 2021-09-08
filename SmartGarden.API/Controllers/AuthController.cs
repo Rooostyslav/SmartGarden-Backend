@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using SmartGarden.BLL.BusinessModels;
+using SmartGarden.BLL.BusinessModels.Auth;
+using SmartGarden.BLL.DTO.Users;
+using SmartGarden.BLL.Services;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using SmartGarden.Auth.Common;
-using SmartGarden.BLL.BusinessModels;
-using SmartGarden.BLL.DTO.Users;
-using SmartGarden.BLL.Services;
 
-namespace SmartGarden.Auth.API.Controllers
+namespace SmartGarden.API.Controllers
 {
 	[Route("api/auth")]
 	[ApiController]
@@ -20,7 +20,7 @@ namespace SmartGarden.Auth.API.Controllers
 		private readonly IOptions<AuthOptions> authOptions;
 		private readonly IUserService userService;
 
-		public AuthController(IOptions<AuthOptions> authOptions, 
+		public AuthController(IOptions<AuthOptions> authOptions,
 			IUserService userService)
 		{
 			this.authOptions = authOptions;

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using SmartGarden.Auth.Common;
+using SmartGarden.BLL.BusinessModels.Auth;
 using SmartGarden.BLL.Infrastructure;
 
 namespace SmartGarden.API
@@ -21,7 +21,10 @@ namespace SmartGarden.API
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-			var authOptions = Configuration.GetSection("Auth").Get<AuthOptions>();
+			var authOptionConfiguration = Configuration.GetSection("Auth");
+			services.Configure<AuthOptions>(authOptionConfiguration);
+
+			var authOptions = authOptionConfiguration.Get<AuthOptions>();
 			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 				.AddJwtBearer(options =>
 				{

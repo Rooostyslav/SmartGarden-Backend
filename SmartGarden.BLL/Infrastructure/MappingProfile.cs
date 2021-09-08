@@ -13,7 +13,8 @@ namespace SmartGarden.BLL.Infrastructure
 	{
 		public MappingProfile()
 		{
-			CreateMap<User, UserDTO>();
+			CreateMap<User, UserDTO>()
+				.ForMember(dest => dest.Role, opt => opt.MapFrom(u => u.Role.ToString().ToLower()));
 			CreateMap<CreateUserDTO, User>();
 			CreateMap<UpdateUserDTO, User>();
 

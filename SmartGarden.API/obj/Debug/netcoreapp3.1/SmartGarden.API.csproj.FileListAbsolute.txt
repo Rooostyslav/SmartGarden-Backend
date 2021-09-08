@@ -195,10 +195,8 @@ E:\ХНУРЕ\3Курс\2Семестр\АПЗ\Проект\SmartGarden\SmartGar
 E:\ХНУРЕ\3Курс\2Семестр\АПЗ\Проект\SmartGarden\SmartGarden.API\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 E:\ХНУРЕ\3Курс\2Семестр\АПЗ\Проект\SmartGarden\SmartGarden.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 E:\ХНУРЕ\3Курс\2Семестр\АПЗ\Проект\SmartGarden\SmartGarden.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-E:\ХНУРЕ\3Курс\2Семестр\АПЗ\Проект\SmartGarden\SmartGarden.API\bin\Debug\netcoreapp3.1\SmartGarden.Auth.Common.dll
 E:\ХНУРЕ\3Курс\2Семестр\АПЗ\Проект\SmartGarden\SmartGarden.API\bin\Debug\netcoreapp3.1\SmartGarden.BLL.dll
 E:\ХНУРЕ\3Курс\2Семестр\АПЗ\Проект\SmartGarden\SmartGarden.API\bin\Debug\netcoreapp3.1\SmartGarden.DAL.dll
-E:\ХНУРЕ\3Курс\2Семестр\АПЗ\Проект\SmartGarden\SmartGarden.API\bin\Debug\netcoreapp3.1\SmartGarden.Auth.Common.pdb
 E:\ХНУРЕ\3Курс\2Семестр\АПЗ\Проект\SmartGarden\SmartGarden.API\bin\Debug\netcoreapp3.1\SmartGarden.BLL.pdb
 E:\ХНУРЕ\3Курс\2Семестр\АПЗ\Проект\SmartGarden\SmartGarden.API\bin\Debug\netcoreapp3.1\SmartGarden.DAL.pdb
 E:\ХНУРЕ\3Курс\2Семестр\АПЗ\Проект\SmartGarden\SmartGarden.API\obj\Debug\netcoreapp3.1\SmartGarden.API.csprojAssemblyReference.cache

@@ -14,6 +14,6 @@ namespace SmartGarden.BLL.DTO.Users
 
 		public string HashedPassword { get; set; }
 
-		public Role Role { get; set; }
+		public string Role { get; set; }
 	}
 }

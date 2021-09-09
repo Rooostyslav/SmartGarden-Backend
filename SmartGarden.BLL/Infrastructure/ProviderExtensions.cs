@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SmartGarden.BLL.Infrastructure.MappingProfiles;
 using SmartGarden.BLL.Services;
 using SmartGarden.BLL.Services.Implementations;
 using SmartGarden.DAL.EF;
@@ -42,6 +43,7 @@ namespace SmartGarden.BLL.Infrastructure
 		{
 			var mapperConfig = new MapperConfiguration(mapperConfig =>
 			{
+				mapperConfig.AddProfile(new UserMappingProfile());
 				mapperConfig.AddProfile(new MappingProfile());
 			});
 

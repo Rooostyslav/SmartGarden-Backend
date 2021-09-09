@@ -4,20 +4,14 @@ using SmartGarden.BLL.DTO.Devices;
 using SmartGarden.BLL.DTO.Gardens;
 using SmartGarden.BLL.DTO.Plants;
 using SmartGarden.BLL.DTO.Resources;
-using SmartGarden.BLL.DTO.Users;
 using SmartGarden.DAL.Entity;
 
-namespace SmartGarden.BLL.Infrastructure
+namespace SmartGarden.BLL.Infrastructure.MappingProfiles
 {
 	public class MappingProfile : Profile
 	{
 		public MappingProfile()
 		{
-			CreateMap<User, UserDTO>()
-				.ForMember(dest => dest.Role, opt => opt.MapFrom(u => u.Role.ToString().ToLower()));
-			CreateMap<CreateUserDTO, User>();
-			CreateMap<UpdateUserDTO, User>();
-
 			CreateMap<Garden, GardenDTO>();
 			CreateMap<CreateGardenDTO, Garden>();
 			CreateMap<UpdateGardenDTO, Garden>();

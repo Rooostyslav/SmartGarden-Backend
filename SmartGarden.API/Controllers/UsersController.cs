@@ -20,11 +20,11 @@ namespace SmartGarden.API.Controllers
 		}
 
 		[HttpGet]
-		[Authorize]
+		//[Authorize]
 		public async Task<IActionResult> GetUsers()
 		{
 			var users = await _userService.FindAllAsync();
-
+			
 			if (users.Count() > 0)
 			{
 				return Ok(users);
@@ -34,7 +34,7 @@ namespace SmartGarden.API.Controllers
 		}
 
 		[HttpGet("{id}")]
-		[Authorize]
+		//[Authorize]
 		public async Task<IActionResult> GetUserById(int id)
 		{
 			var user = await _userService.FindByIdAsync(id);
@@ -48,10 +48,10 @@ namespace SmartGarden.API.Controllers
 		}
 
 		[HttpGet("my")]
-		[Authorize]
+		//[Authorize]
 		public async Task<IActionResult> GetMyUser()
 		{
-			int myId = User.Id();
+			int myId = 2; //User.Id();
 			var myUser = await _userService.FindByIdAsync(myId);
 
 			if (myUser != null)
@@ -78,7 +78,7 @@ namespace SmartGarden.API.Controllers
 		}
 
 		[HttpPut]
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		public async Task<IActionResult> UpdateUser(
 			[FromBody] UpdateUserDTO userToUpdate)
 		{
@@ -93,7 +93,7 @@ namespace SmartGarden.API.Controllers
 		}
 
 		[HttpDelete("{id}")]
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		public async Task<IActionResult> DeleteUser(int id)
 		{
 			await _userService.DeleteAsync(id);

@@ -1,5 +1,4 @@
-﻿using SmartGarden.BLL.DTO.Common;
-using SmartGarden.BLL.Validations.Users;
+﻿using SmartGarden.BLL.Validations.Users;
 using System.ComponentModel.DataAnnotations;
 
 namespace SmartGarden.BLL.DTO.Users
@@ -12,11 +11,13 @@ namespace SmartGarden.BLL.DTO.Users
 
 		[Required(ErrorMessage = "Required field.")]
 		[StringLength(50, MinimumLength = 3)]
+		[RegularExpression(@"^[A-Z]", ErrorMessage = "Capitalize first character.")]
 		[DataType(DataType.Text)]
 		public string FirstName { get; set; }
 
 		[Required(ErrorMessage = "Required field.")]
 		[StringLength(50, MinimumLength = 3)]
+		[RegularExpression(@"^[A-Z]", ErrorMessage = "Capitalize first character.")]
 		[DataType(DataType.Text)]
 		public string SecondName { get; set; }
 
@@ -32,6 +33,6 @@ namespace SmartGarden.BLL.DTO.Users
 		public string Password { get; set; }
 
 		[Required(ErrorMessage = "Required field.")]
-		public RoleDTO Role { get; set; }
+		public int Role { get; set; }
 	}
 }
